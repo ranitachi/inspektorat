@@ -1,5 +1,7 @@
 @extends('backend.layouts.master')
-
+@section('title')
+    <title>Data OPD</title>
+@endsection
 @section('modal')
 	<div class="modal fade" id="modaltambah" tabindex="-1" role="dialog">
 		<div class="modal-dialog">

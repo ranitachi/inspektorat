@@ -11,11 +11,11 @@ class MasterKepalaDinas extends Model
     use SoftDeletes;
     protected $table = 'master_kepala_dinas';
     protected $fillable = [
-        'nama','user_id','flag','created_at','updated_at','deleted_at'
+        'nama','dinas_id','user_id','flag','created_at','updated_at','deleted_at'
     ];
 
-    function kepaladinas(){
-		return $this->belongsTo('App\Models\MasterDinas','dinas_id');
+    function dinas(){
+		  return $this->belongsTo('App\Models\MasterDinas','dinas_id');
     }
     
     function userkepala(){

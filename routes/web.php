@@ -20,6 +20,7 @@ Route::get('/dashboard', function(){
 })->middleware('auth');
 
 Route::resource('data-opd','MasterDinasController')->middleware('auth');
+Route::resource('kepala-opd','MasterKepalaDinasController')->middleware('auth');
 
 Auth::routes();
 

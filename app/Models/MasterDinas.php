@@ -11,11 +11,6 @@ class MasterDinas extends Model
     protected $table='master_dinas';
     protected $fillable = ['nama_dinas','singkatan','alamat','flag','created_at','updated_at','deleted_at'];
 
-    function kepaladinas()
-    {
-        return $this->hasMany('App\Models\MasterKepalaDinas','dinas_id');
-    }
-
     function dinas()
     {
         return $this->hasMany('App\Models\PivotUserDinas','dinas_id');

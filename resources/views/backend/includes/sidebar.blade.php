@@ -21,7 +21,9 @@
       </div><!-- .media-body -->
     </div><!-- .media -->
   </div><!-- .app-user -->
-
+@php
+    $url=Request::path();
+@endphp
   <div class="menubar-scroll">
     <div class="menubar-scroll-inner">
       <ul class="app-menu">
@@ -31,15 +33,15 @@
             <span class="menu-text">Dashboards</span>
           </a>
         </li>
-        <li class="has-submenu">
+        <li class="has-submenu {{$url=='data-opd' || $url=='kepala-opd' ? 'active open' : ''}}">
           <a href="javascript:void(0)" class="submenu-toggle">
             <i class="menu-icon fa fa-archive"></i>
             <span class="menu-text">Master OPD</span>
             <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
           </a>
-          <ul class="submenu">
-            <li><a href="{{url('data-opd')}}"><span class="menu-text">Data OPD</span></a></li>
-            <li><a href="{{url('kepala-opd')}}"><span class="menu-text">Kepala OPD</span></a></li>
+          <ul class="submenu" style="{{$url=='data-opd' || $url=='kepala-opd' ? 'display:block' : ''}}">
+            <li class="{{$url=='data-opd' ? 'active' : ''}}"><a href="{{url('data-opd')}}"><span class="menu-text">Data OPD</span></a></li>
+            <li class="{{$url=='kepala-opd' ? 'active' : ''}}"><a href="{{url('kepala-opd')}}"><span class="menu-text">Kepala OPD</span></a></li>
           </ul>
         </li>
         <li class="has-submenu">
