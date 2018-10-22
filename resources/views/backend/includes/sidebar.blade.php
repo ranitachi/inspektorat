@@ -44,20 +44,20 @@
             <li class="{{$url=='kepala-opd' ? 'active' : ''}}"><a href="{{url('kepala-opd')}}"><span class="menu-text">Kepala OPD</span></a></li>
           </ul>
         </li>
-        <li class="has-submenu">
+        <li class="has-submenu {{$url=='data-temuan' || $url=='data-penyebab' || $url=='data-rekomendasi' || $url=='bidang-pengawasan' ? 'active open' : ''}}">
           <a href="javascript:void(0)" class="submenu-toggle">
             <i class="menu-icon fa fa-bars"></i>
             <span class="menu-text">Master Data</span>
             <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
           </a>
-          <ul class="submenu">
-            <li><a href="{{url('data-temuan')}}"><span class="menu-text">Data Temuan</span></a></li>
-            <li><a href="{{url('data-penyebab')}}"><span class="menu-text">Data Penyebab</span></a></li>
-            <li><a href="{{url('data-rekomendasi')}}"><span class="menu-text">Data Rekomendasi</span></a></li>
-            <li><a href="{{url('bidang-pengawasan')}}"><span class="menu-text">Bidang Pengawasan</span></a></li>
+          <ul class="submenu" style="{{$url=='data-temuan' || $url=='data-penyebab' || $url=='data-rekomendasi' || $url=='bidang-pengawasan' ? 'display:block' : ''}}">
+            <li class="{{$url=='data-temuan'  ? 'active open' : ''}}"><a href="{{url('data-temuan')}}"><span class="menu-text">Data Temuan</span></a></li>
+            <li class="{{$url=='data-penyebab' ? 'active open' : ''}}"><a href="{{url('data-penyebab')}}"><span class="menu-text">Data Penyebab</span></a></li>
+            <li class="{{$url=='data-rekomendasi' ? 'active open' : ''}}"><a href="{{url('data-rekomendasi')}}"><span class="menu-text">Data Rekomendasi</span></a></li>
+            <li class="{{$url=='bidang-pengawasan' ? 'active open' : ''}}"><a href="{{url('bidang-pengawasan')}}"><span class="menu-text">Bidang Pengawasan</span></a></li>
           </ul>
         </li>
-        <li>
+        <li class="has-submenu {{$url=='users' ? 'active open' : ''}}">
           <a href="{{url('users')}}">
             <i class="menu-icon fa fa-users"></i>
             <span class="menu-text">Data User</span>
@@ -66,7 +66,7 @@
         <li class="menu-separator"><hr></li>
 
         <li>
-          <a href="javascript:void(0)">
+          <a href="{{url('logout')}}">
             <i class="menu-icon fa fa-sign-out"></i>
             <span class="menu-text">Logout</span>
           </a>

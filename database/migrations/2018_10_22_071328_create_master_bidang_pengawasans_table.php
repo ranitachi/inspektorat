@@ -15,6 +15,7 @@ class CreateMasterBidangPengawasansTable extends Migration
     {
         Schema::create('master_bidang_pengawasan', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('code')->nullable();
             $table->text('bidang')->nullable();
             $table->integer('flag')->nullable()->default(0);
             $table->timestamps();
