@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
 Route::get('/dashboard', function(){
@@ -26,6 +26,9 @@ Route::resource('data-penyebab','MasterSebabController')->middleware('auth');
 Route::resource('data-rekomendasi','MasterRekomendasiController')->middleware('auth');
 Route::resource('bidang-pengawasan','MasterBidangPengawasanController')->middleware('auth');
 Route::resource('users','UsersController')->middleware('auth');
+
+Route::resource('list-temuan','DaftarTemuanController')->middleware('auth');
+Route::get('list-temuan-data/{dinas_id?}/{tahun?}','DaftarTemuanController@data')->middleware('auth');
 
 Auth::routes();
 Route::get('logout',function(){

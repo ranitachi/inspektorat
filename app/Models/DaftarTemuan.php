@@ -21,4 +21,8 @@ class DaftarTemuan extends Model
     {
         return $this->belongsTo('App\Models\MasterDinas','dinas_id');
     }
+    function detail()
+    {
+        return $this->hasMany('App\Models\DetailTemuan','daftar_id');
+    }
 }

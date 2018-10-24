@@ -13,7 +13,11 @@
 <!--========== END app navbar -->
 
 <!-- APP ASIDE ==========-->
-@include('backend.includes.sidebar')
+@if (Auth::user()->level==1)
+	@include('backend.includes.sidebar')
+@elseif (Auth::user()->level==2)
+	@include('backend.includes.sidebar-operator')
+@endif
 <!--========== END app aside -->
 
 <!-- navbar search -->
@@ -38,7 +42,7 @@
 <!--========== END app main -->
 
 	<!-- APP CUSTOMIZER -->
-	<div id="app-customizer" class="app-customizer">
+	{{-- <div id="app-customizer" class="app-customizer">
 		<a href="javascript:void(0)" 
 			class="app-customizer-toggle theme-color" 
 			data-toggle="class" 
@@ -275,26 +279,37 @@
 				</a><!-- .media-group-item -->
 			</div>
 		</div><!-- .scrollable-container -->
-	</div><!-- /#side-panel -->
+	</div><!-- /#side-panel --> --}}
 
 	<!-- build:js theme/backend/assets/js/core.min.js -->
-	<script src="theme/backend/libs/bower/jquery/dist/jquery.js"></script>
-	<script src="theme/backend/libs/bower/jquery-ui/jquery-ui.min.js"></script>
-	<script src="theme/backend/libs/bower/jQuery-Storage-API/jquery.storageapi.min.js"></script>
-	<script src="theme/backend/libs/bower/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
-	<script src="theme/backend/libs/bower/jquery-slimscroll/jquery.slimscroll.js"></script>
-	<script src="theme/backend/libs/bower/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
-	<script src="theme/backend/libs/bower/PACE/pace.min.js"></script>
+	<script>
+		// "global" vars, built using blade
+		var flagsUrl = '{{ url("/") }}';
+		// alert(flagsUrl);
+	</script>
+	<script src="{{asset('theme/backend/libs/bower/jquery/dist/jquery.js')}}"></script>
+	<script src="{{asset('theme/backend/libs/bower/jquery-ui/jquery-ui.min.js')}}"></script>
+	<script src="{{asset('theme/backend/libs/bower/jQuery-Storage-API/jquery.storageapi.min.js')}}"></script>
+	<script src="{{asset('theme/backend/libs/bower/bootstrap-sass/assets/javascripts/bootstrap.js')}}"></script>
+	<script src="{{asset('theme/backend/libs/bower/jquery-slimscroll/jquery.slimscroll.js')}}"></script>
+	<script src="{{asset('theme/backend/libs/bower/perfect-scrollbar/js/perfect-scrollbar.jquery.js')}}"></script>
+	<script src="{{asset('theme/backend/libs/bower/PACE/pace.min.js')}}"></script>
 	<!-- endbuild -->
 
 	<!-- build:js theme/backend/assets/js/app.min.js -->
-	<script src="theme/backend/assets/js/library.js"></script>
-	<script src="theme/backend/assets/js/plugins.js"></script>
-	<script src="theme/backend/assets/js/app.js"></script>
+	<script src="{{asset('theme/backend/assets/js/library.js')}}"></script>
+	<script src="{{asset('theme/backend/assets/js/plugins.js')}}"></script>
+	<script src="{{asset('theme/backend/assets/js/app.js')}}"></script>
 	<!-- endbuild -->
-	<script src="theme/backend/libs/bower/moment/moment.js"></script>
-	<script src="theme/backend/libs/bower/fullcalendar/dist/fullcalendar.min.js"></script>
-	<script src="theme/backend/assets/js/fullcalendar.js"></script>
+	<script src="{{asset('theme/backend/libs/bower/moment/moment.js')}}"></script>
+	<script src="{{asset('theme/backend/libs/bower/fullcalendar/dist/fullcalendar.min.js')}}"></script>
+	<script src="{{asset('theme/backend/assets/js/fullcalendar.js')}}"></script>
 	@yield('footscript')
 </body>
 </html>
+<style>
+table th,table td
+{
+	font-size:12px !important;
+}
+</style>
