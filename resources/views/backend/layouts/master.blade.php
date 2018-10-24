@@ -312,4 +312,5 @@ table th,table td
 {
 	font-size:12px !important;
 }
+.datepicker { z-index: 10000 !important; }
 </style>

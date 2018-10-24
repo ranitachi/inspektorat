@@ -12,12 +12,13 @@
 			<hr class="widget-separator">
 			<div class="widget-body">
                 <form class="form-horizontal" action="{{url('list-temuan')}}" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleTextInput1" class="col-sm-4 control-label">Tahun Pemeriksaan</label>
                                 <div class="col-sm-3">
-                                    <select name="tahun" id="tahun" class="form-control text-left select2" data-plugin="select2" onchange="getdata()">
+                                    <select name="tahun" id="tahun" class="form-control text-left select2" data-plugin="select2" >
                                         @for ($i = (date('Y')-5); $i <= (date('Y')); $i++)
                                             <option value="{{$i}}" {{date('Y')==$i ? 'selected="selected"' : ''}}>{{$i}}</option>
                                         @endfor
@@ -27,7 +28,7 @@
                             <div class="form-group">
                                 <label for="email2" class="col-sm-4 control-label">Obyek Pemeriksaan</label>
                                 <div class="col-sm-8">
-                                    <select name="dinas_id" id="dinas_id" class="form-control text-left" style="text-align:left !important" data-plugin="select2" onchange="getdata()">
+                                    <select name="dinas_id" id="dinas_id" class="form-control text-left" style="text-align:left !important" data-plugin="select2" >
                                         <option value="">-- Pilih Dinas --</option>
                                         @foreach ($dinas as $item)
                                             <option value="{{$item->id}}">{{$item->nama_dinas}}</option>
@@ -38,7 +39,7 @@
                             <div class="form-group">
                                 <label for="textarea1" class="col-sm-4 control-label">Bidang Pengawasan</label>
                                 <div class="col-sm-8">
-                                    <select name="pengawasan_id" id="pengawasan_id" class="form-control text-left" style="text-align:left !important" data-plugin="select2" onchange="getdata()">  
+                                    <select name="pengawasan_id" id="pengawasan_id" class="form-control text-left" style="text-align:left !important" data-plugin="select2" >  
                                         <option value="">-- Pilih Bidang Pengawasan --</option>
                                         @foreach ($bidang as $item)
                                             <option value="{{$item->id}}">{{$item->bidang}}</option>
@@ -72,72 +73,93 @@
 
                     <hr class="widget-separator">
                     <br>
-                    @for ($i = 0; $i < 5; $i++)
+                    @for ($i = 0; $i < 1; $i++)
                     
                         <div class="row" style="">
-                            <div class="col-md-4">
-                                <div class="row" style="padding:0 15px;">
-                                    <div class="col-md-10">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
                                         <div class="form-group" style="margin-bottom:5px !important;">
-                                            {!!$i==0 ? '<label for="exampleInputEmail1">Kode Temuan</label>' : ''!!}
-                                            <select name="temuan[{{$i}}]" id="temuan" class="form-control text-left" style="text-align:left !important" data-plugin="select2" onchange="getdata()">  
-                                                    <option value="">-- Kode Temuan --</option>
-                                                    @foreach ($temuan as $item)
-                                                        <option value="{{$item->id}}">{{$item->code}} - {{$item->temuan}}</option>
-                                                    @endforeach
-                                            </select>
+                                            {!!$i==0 ? '<label for="exampleInputEmail1" class="col-md-4 control-label">Kode Temuan</label>' : ''!!}
+                                            <div class="col-sm-8">
+                                                <select name="temuan[{{$i}}]" id="temuan" class="form-control text-left" style="text-align:left !important" data-plugin="select2" >  
+                                                        <option value="">-- Kode Temuan --</option>
+                                                        @foreach ($temuan as $item)
+                                                            <option value="{{$item->id}}">{{$item->code}} - {{$item->temuan}}</option>
+                                                        @endforeach
+                                                </select>
+                                            </div>
                                         </div> 
                                     </div>
-                                    <div class="col-md-11">
-                                        <div class="form-group" style="margin-top:0px !important;">
-                                            <textarea class="form-control" name="uraian_temuan[{{$i}}]" style="margin-top:0px !important" placeholder="Uraian Singkat"></textarea>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12" >
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1" class="col-md-2 control-label">Uraian Temuan</label>
+                                            <div class="col-md-10">
+                                                <textarea class="form-control" name="uraian_temuan[{{$i}}]" id="uraian_temuan" style="margin-top:0px !important" placeholder="Uraian Singkat"></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 
                             </div>
-                            <div class="col-md-4">
-                                <div class="row" style="padding:0 15px;">
-                                    <div class="col-md-10">
+                            <hr class="widget-separator" style="margin:10px 0;">
+                            <div class="col-md-12">
+                                 <div class="row">
+                                    <div class="col-md-6">
                                         <div class="form-group" style="margin-bottom:5px !important;">
-                                            {!!$i==0 ? '<label for="exampleInputEmail1">Kode Penyebab</label>' : ''!!}
-                                            <select name="sebab[{{$i}}]" id="sebab" class="form-control text-left" style="text-align:left !important" data-plugin="select2" onchange="getdata()">  
-                                                    <option value="">-- Kode Penyebab--</option>
-                                                    @foreach ($sebab as $item)
-                                                        <option value="{{$item->id}}">{{$item->code}} - {{$item->sebab}}</option>
-                                                    @endforeach
-                                            </select>
+                                            {!!$i==0 ? '<label for="exampleInputEmail1" class="col-md-4 control-label">Kode Penyebab</label>' : ''!!}
+                                            <div class="col-sm-8">
+                                                <select name="sebab[{{$i}}]" id="sebab" class="form-control text-left" style="text-align:left !important" data-plugin="select2" >  
+                                                        <option value="">-- Kode Penyebab--</option>
+                                                        @foreach ($sebab as $item)
+                                                            <option value="{{$item->id}}">{{$item->code}} - {{$item->sebab}}</option>
+                                                        @endforeach
+                                                </select>
+                                        </div>
                                         </div> 
-                                    </div> 
-                                    <div class="col-md-11">
-                                        <div class="form-group" style="margin-top:0px !important;">
-                                            <textarea class="form-control" name="uraian_sebab[{{$i}}]" style="margin-top:0px !important" placeholder="Uraian Singkat"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12" >
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1" class="col-md-2 control-label">Uraian Penyebab</label>
+                                            <div class="col-md-10">
+                                                <textarea class="form-control" name="uraian_sebab[{{$i}}]" style="margin-top:0px !important" placeholder="Uraian Singkat" id="uraian_sebab" ></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div> 
                             </div>
-                            <div class="col-md-4">
-                                <div class="row" style="padding:0 15px;">
-                                    <div class="col-md-10">
+                            <hr class="widget-separator" style="margin:10px 0;">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
                                         <div class="form-group" style="margin-bottom:5px !important;">
-                                            {!!$i==0 ? '<label for="exampleInputEmail1">Kode Rekomendasi</label>' : ''!!}
-                                            <select name="rekomendasi[{{$i}}]" id="rekomendasi" class="form-control text-left" style="text-align:left !important" data-plugin="select2" onchange="getdata()">  
-                                                    <option value="">-- Kode Rekomendasi --</option>
-                                                    @foreach ($rekomendasi as $item)
-                                                        <option value="{{$item->id}}">{{$item->code}} - {{$item->rekomendasi}}</option>
-                                                    @endforeach
-                                            </select>
+                                            {!!$i==0 ? '<label for="exampleInputEmail1" class="col-md-4 control-label">Kode Rekomendasi</label>' : ''!!}
+                                            <div class="col-sm-8">
+                                                <select name="rekomendasi[{{$i}}]" id="rekomendasi" class="form-control text-left" style="text-align:left !important" data-plugin="select2" >  
+                                                        <option value="">-- Kode Rekomendasi --</option>
+                                                        @foreach ($rekomendasi as $item)
+                                                            <option value="{{$item->id}}">{{$item->code}} - {{$item->rekomendasi}}</option>
+                                                        @endforeach
+                                                </select>
+                                            </div> 
                                         </div> 
                                     </div> 
-                                    <div class="col-md-11">
-                                        <div class="form-group" style="margin-top:0px !important;">
-                                            <textarea class="form-control" name="uraian_rekomendasi[{{$i}}]" style="margin-top:0px !important" placeholder="Uraian Singkat"></textarea>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1" class="col-md-2 control-label">Uraian Rekomendasi</label>
+                                            <div class="col-md-10">
+                                                <textarea class="form-control" name="uraian_rekomendasi[{{$i}}]" style="margin-top:0px !important" placeholder="Uraian Singkat" id="uraian_rekomendasi" ></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div> 
                             </div>
                         </div>
-                        <hr class="widget-separator" style="margin:10px 0;">
+                        
                     @endfor
                     <div class="row">
                         <div class="col-sm-9 col-sm-offset-3">
@@ -152,6 +174,12 @@
     </div>
 @endsection
 @section('footscript')
+<script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+<script>
+    CKEDITOR.replace( 'uraian_temuan' );
+    CKEDITOR.replace( 'uraian_sebab' );
+    CKEDITOR.replace( 'uraian_rekomendasi' );
+</script>
 <script>
     $(document).ready(function(){
         

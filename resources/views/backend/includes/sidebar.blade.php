@@ -63,6 +63,12 @@
             <span class="menu-text">Data User</span>
           </a>
         </li>
+        <li {{$url=='list-temuan' ? 'active open' : ''}}">
+          <a href="{{url('list-temuan')}}">
+            <i class="menu-icon fa fa-archive"></i>
+            <span class="menu-text">Daftar Temuan</span>
+          </a>
+        </li>
         <li class="menu-separator"><hr></li>
 
         <li>

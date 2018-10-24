@@ -10,7 +10,7 @@ class DetailTemuan extends Model
     use SoftDeletes;
     protected $table = 'detail_temuan';
     protected $fillable = [
-        'daftar_id','pengawasan_id','temuan_id','sebab_id','rekomendasi_id','no_pengawasan','tgl_pengawasan','uraian_temuan','uraian_rekomendasi','created_at','updated_at','deleted_at'
+        'daftar_id','pengawasan_id','temuan_id','sebab_id','rekomendasi_id','no_pengawasan','tgl_pengawasan','uraian_temuan','uraian_rekomendasi','flag','penyebab','created_at','updated_at','deleted_at'
     
     ];
 

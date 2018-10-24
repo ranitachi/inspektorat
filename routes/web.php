@@ -28,7 +28,11 @@ Route::resource('bidang-pengawasan','MasterBidangPengawasanController')->middlew
 Route::resource('users','UsersController')->middleware('auth');
 
 Route::resource('list-temuan','DaftarTemuanController')->middleware('auth');
-Route::get('list-temuan-data/{dinas_id?}/{tahun?}','DaftarTemuanController@data')->middleware('auth');
+Route::get('list-temuan-data/{dinas_id?}/{tahun?}/{bidang_id?}','DaftarTemuanController@data')->middleware('auth');
+Route::get('detail-form/{daftar_id}/{dinas_id?}/{tahun?}/{bidang_id?}','DaftarTemuanController@form_detail')->middleware('auth');
+Route::post('detail-temuan-update/{id}','DaftarTemuanController@update_detail')->middleware('auth');
+Route::post('detail-temuan-delete','DaftarTemuanController@detail_destroy')->middleware('auth');
+Route::post('detail-temuan-verifikasi','DaftarTemuanController@detail_verifikasi')->middleware('auth');
 
 Auth::routes();
 Route::get('logout',function(){
