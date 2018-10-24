@@ -67,8 +67,8 @@
 		<div class="widget">
 			<header class="widget-header">
 				<span class="widget-title">Daftar Termuan</span>
-                {{-- <a href="{{url('tambah-daftar')}}" class="btn btn-sm btn-success pull-right">+ Tambah Data</a> --}}
-            <!-- .widget-header -->
+                
+                @if (!Auth::user()->level==3)
                     <div class="row">
                         <div class="col-md-8">&nbsp;</div>
                         <div class="col-md-3 text-right">
@@ -95,6 +95,7 @@
                             </select>
                         </div>
                     </div>
+<<<<<<< HEAD
                     <div class="row" style="margin-top:5px;">
                                 <div class="col-md-8">&nbsp;</div>
                                 
@@ -111,7 +112,11 @@
                                     </select>
                                 </div>
                             </div>
+=======
+                @endif
+>>>>>>> b234ee01b48bb4284b210fcdef8d100371481b44
             </header>
+            
 			<hr class="widget-separator">
 			<div class="widget-body">
                 

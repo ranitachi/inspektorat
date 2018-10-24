@@ -19,6 +19,7 @@
         </tr>
 	</thead>
 	<tbody>
+<<<<<<< HEAD
 		@foreach ($daftar as $uss)
 			@if (isset($det[$uss->id]))
 			
@@ -85,5 +86,45 @@
 				@endforeach
 			@endif
 	@endforeach
+=======
+		{{-- @foreach ($daftar as $key => $us) --}}
+			<tr>
+				<td>1</td>
+				<td>
+					Audit Kinerja <br>
+					700.138/08-Insp/I/2017 <br>
+					29 Mei 2017
+				</td>
+				<td>
+					Terdapat 2 orang Pejabat belum membuat Program Kerja, yaitu sebagai berikut:
+					<br>
+					- Kepala Sub Bidang Keuangan <br>
+					- Kepala Sub Bidang Administratif <br>
+					<br>
+					Penyebab: <br>
+					Pejabat yang bersangkutan belum menaati peraturan yang berlaku.
+				</td>
+				<td>03</td>
+				<td>104</td>
+				<td>
+					Kepala Dinas secara tertulis memerintahkan agar segera membuat Program Kerja Tahunan untuk Tahun Anggaran 2017.
+				</td>
+				<td>050</td>
+				<td><i style="color:red;">Belum Ada</i></td>
+				<td style="display:flex;">
+					<span data-toggle="tooltip" data-title="Tanggapan">
+						<a href="{{ route('tindak-lanjut.index') }}" class="btn btn-xs btn-success" style="height:24px !important;">
+							<i class="fa fa-volume-up"></i>
+						</a>
+					</span>&nbsp;
+					<span data-toggle="tooltip" data-title="Detail">
+						<a class="btn btn-xs btn-primary" style="height:24px !important;">
+							<i class="fa fa-list"></i>
+						</a>
+					</span>
+				</td>
+			</tr>
+	{{-- @endforeach --}}
+>>>>>>> b234ee01b48bb4284b210fcdef8d100371481b44
 	</tbody>
 </table>

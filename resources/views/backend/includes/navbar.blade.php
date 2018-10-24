@@ -19,7 +19,7 @@
 
     <a href="theme/backend/index.html" class="navbar-brand">
       <span class="brand-icon"><i class="fa fa-gg"></i></span>
-      <span class="brand-name">Infinity</span>
+      <span class="brand-name">SIMPEL</span>
     </a>
   </div><!-- .navbar-header -->
   
