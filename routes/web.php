@@ -26,6 +26,7 @@ Route::resource('data-penyebab','MasterSebabController')->middleware('auth');
 Route::resource('data-rekomendasi','MasterRekomendasiController')->middleware('auth');
 Route::resource('bidang-pengawasan','MasterBidangPengawasanController')->middleware('auth');
 Route::resource('users','UsersController')->middleware('auth');
+Route::resource('tindak-lanjut', 'TindakLanjutTemuanController');
 
 Route::resource('list-temuan','DaftarTemuanController')->middleware('auth');
 Route::get('list-temuan-data/{dinas_id?}/{tahun?}','DaftarTemuanController@data')->middleware('auth');
