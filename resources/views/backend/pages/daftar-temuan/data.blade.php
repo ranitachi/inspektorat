@@ -7,7 +7,11 @@
 			<th class="text-center" colspan="2">Kode</th>
 			<th class="text-center" rowspan="2">Rekomendasi<br>(Uraian Ringkas)</th>
 			<th class="text-center" rowspan="2">Kode Rekomendasi</th>
-			<th class="text-center" rowspan="2">Tanggapan</th>
+			@if (Auth::user()->level==3)
+				<th class="text-center" rowspan="2">Tanggapan</th>
+			@else
+				<th class="text-center" rowspan="2">Status</th>
+			@endif
 			<th class="text-center" rowspan="2">Aksi</th>
         </tr>
         <tr>
@@ -39,18 +43,43 @@
 					Kepala Dinas secara tertulis memerintahkan agar segera membuat Program Kerja Tahunan untuk Tahun Anggaran 2017.
 				</td>
 				<td>050</td>
-				<td><i style="color:red;">Belum Ada</i></td>
+				@if (Auth::user()->level==3)
+					<td><i style="color:red;">Belum Ada</i></td>
+				@else
+					<td><i style="color:green;">Sudah Verifikasi</i></td>
+				@endif
 				<td style="display:flex;">
-					<span data-toggle="tooltip" data-title="Tanggapan">
-						<a href="{{ route('tindak-lanjut.index') }}" class="btn btn-xs btn-success" style="height:24px !important;">
-							<i class="fa fa-volume-up"></i>
-						</a>
-					</span>&nbsp;
-					<span data-toggle="tooltip" data-title="Detail">
-						<a class="btn btn-xs btn-primary" style="height:24px !important;">
-							<i class="fa fa-list"></i>
-						</a>
-					</span>
+					@if (Auth::user()->level==3)
+						<span data-toggle="tooltip" data-title="Tanggapan">
+							<a href="{{ route('tindak-lanjut.index') }}" class="btn btn-xs btn-success" style="height:24px !important;">
+								<i class="fa fa-volume-up"></i>
+							</a>
+						</span>&nbsp;
+						<span data-toggle="tooltip" data-title="Detail">
+							<a class="btn btn-xs btn-primary" style="height:24px !important;">
+								<i class="fa fa-list"></i>
+							</a>
+						</span>
+					@endif
+					@if (Auth::user()->level==1)
+						<span data-toggle="tooltip" data-title="Verifikasi">
+							<a href="" class="btn btn-xs btn-success" style="height:24px !important;">
+								<i class="fa fa-check"></i>
+							</a>
+						</span>
+					@endif
+					@if (Auth::user()->level==2)
+						<span data-toggle="tooltip" data-title="Ubah">
+							<a href="" class="btn btn-xs btn-warning" style="height:24px !important;">
+								<i class="fa fa-edit"></i>
+							</a>
+						</span>&nbsp;
+						<span data-toggle="tooltip" data-title="Hapus">
+							<a href="" class="btn btn-xs btn-danger" style="height:24px !important;">
+								<i class="fa fa-trash"></i>
+							</a>
+						</span>
+					@endif
 				</td>
 			</tr>
 	{{-- @endforeach --}}

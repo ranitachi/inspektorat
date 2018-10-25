@@ -2,9 +2,7 @@
   <div class="app-user">
     <div class="media">
       <div class="media-left">
-        <div class="avatar avatar-md avatar-circle">
-          <a href="javascript:void(0)"><img class="img-responsive" src="{{asset('theme/backend/assets/images/221.jpg')}}" alt="avatar"/></a>
-        </div><!-- .avatar -->
+        
       </div>
       <div class="media-body">
         <div class="foldable">

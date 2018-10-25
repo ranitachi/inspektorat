@@ -16,19 +16,17 @@
 	<link rel="stylesheet" href="theme/backend/assets/css/misc-pages.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900,300">
 </head>
-<body class="simple-page">
-	<div id="back-to-home">
-		<a href="{{url('/')}}" class="btn btn-outline btn-default"><i class="fa fa-home animated zoomIn"></i></a>
-	</div>
+<body class="simple-page" style="background:#5b69bc;">
 	<div class="simple-page-wrap">
 		<div class="simple-page-logo animated swing">
 			<a href="{{url('/')}}">
-				<span><i class="fa fa-gg"></i></span>
-				<span>Infinity</span>
+				{{-- <span><i class="fa fa-gg"></i></span> --}}
+                <span>Simpel By Inspektorat</span><br>
+                <span style="font-size:15px;">Pemerintah Kabupaten Tangerang</span>
 			</a>
 		</div><!-- logo -->
 		<div class="simple-page-form animated flipInY" id="login-form">
-            <h4 class="form-title m-b-xl text-center">Sign In With Your Account</h4>
+            <h4 class="form-title m-b-xl text-center">Silahkan Lakukan Login</h4>
                 <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                 @csrf
                     <div class="form-group">
@@ -59,7 +57,7 @@
                             <label for="keep_me_logged_in">Keep me signed in</label>
                         </div>
                     </div> --}}
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn" style="background:#5b69bc;color:#fff;">
                     {{ __('Login') }}
                 </button>
             </form>
