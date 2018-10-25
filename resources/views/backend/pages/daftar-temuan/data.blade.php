@@ -19,7 +19,6 @@
         </tr>
 	</thead>
 	<tbody>
-<<<<<<< HEAD
 		@foreach ($daftar as $uss)
 			@if (isset($det[$uss->id]))
 			
@@ -86,9 +85,8 @@
 				@endforeach
 			@endif
 	@endforeach
-=======
 		{{-- @foreach ($daftar as $key => $us) --}}
-			<tr>
+			{{-- <tr>
 				<td>1</td>
 				<td>
 					Audit Kinerja <br>
@@ -123,8 +121,7 @@
 						</a>
 					</span>
 				</td>
-			</tr>
+			</tr> --}}
 	{{-- @endforeach --}}
->>>>>>> b234ee01b48bb4284b210fcdef8d100371481b44
 	</tbody>
 </table>
