@@ -28,6 +28,9 @@ Route::resource('bidang-pengawasan','MasterBidangPengawasanController')->middlew
 Route::resource('users','UsersController')->middleware('auth');
 Route::resource('tindak-lanjut', 'TindakLanjutTemuanController');
 
+Route::get('rekap-temuan','LaporanTemuanController@index')->middleware('auth');
+Route::get('rekap-temuan-detail/{opd}','LaporanTemuanController@rekapdetail')->middleware('auth');
+
 Route::resource('list-temuan','DaftarTemuanController')->middleware('auth');
 Route::get('list-temuan-data/{dinas_id?}/{tahun?}/{bidang_id?}','DaftarTemuanController@data')->middleware('auth');
 Route::get('detail-form/{daftar_id}/{dinas_id?}/{tahun?}/{bidang_id?}','DaftarTemuanController@form_detail')->middleware('auth');

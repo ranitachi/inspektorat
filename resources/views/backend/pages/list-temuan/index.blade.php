@@ -1,139 +1,199 @@
 @extends('backend.layouts.master')
 
 @section('title')
-    <title>Data User</title>
+    <title>Daftar Temuan</title>
 @endsection
-
+@section('modal')
+    <div class="modal fade" id="modalhapus" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Konfirmasi Hapus Detail Temuan</h4>
+				</div>
+				<div class="modal-body">
+					<h5>Apakah anda yakin akan menghapus data ini?</h5>
+				</div>
+				<div class="modal-footer">
+					<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
+					<a class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('form-delete').submit();" style="cursor:pointer;">Ya, Saya Yakin</a>
+                    <form id="form-delete" method="POST" style="display: none;" action="{{url('detail-temuan-delete')}}">
+                        @csrf
+                        <input type="hidden" name="id" id="iddetail">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+    <div class="modal fade" id="modalverifikasi" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Verifikasi Detail Temuan</h4>
+				</div>
+				<div class="modal-body">
+					<h5>Apakah anda yakin akan me-verifikasi data ini?</h5>
+				</div>
+				<div class="modal-footer">
+					<button type="button" data-dismiss="modal" class="btn btn-default">Batal</button>
+					<a class="btn btn-info" onclick="event.preventDefault(); document.getElementById('form-verifikasi').submit();" style="cursor:pointer;">Ya, Saya Yakin</a>
+                    <form id="form-verifikasi" method="POST" style="display: none;" action="{{url('detail-temuan-verifikasi')}}">
+                        @csrf
+                        <input type="hidden" name="id" id="iddetailverif">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+@endsection
 @section('content')
+@php
+    $dinas_id=$tahun=$pengawasan_id='';
+    if(Session::has('dinas_id'))
+    {
+        $dinas_id=Session::get('dinas_id');
+    }                                    
+    if(Session::has('tahun'))
+    {
+        $tahun=Session::get('tahun');
+    }                                    
+    if(Session::has('pengawasan_id'))
+    {
+        $pengawasan_id=Session::get('pengawasan_id');
+    }                                    
+@endphp
 	<div class="col-md-12">
 		<div class="widget">
 			<header class="widget-header">
-                <span class="widget-title">Data Temuan</span>
-			</header><!-- .widget-header -->
+				<span class="widget-title">Daftar Temuan</span>
+                
+                {{-- @if (!Auth::user()->level==1 || Auth::user()->level==2) --}}
+                    <div class="row">
+                        <div class="col-md-8">&nbsp;</div>
+                        <div class="col-md-3 text-right">
+                            <select name="dinas_id" id="dinas_id" class="form-control text-left" data-plugin="select2" style="text-align:left !important" onchange="getdata()">
+                                <option value="">-- Pilih Dinas --</option>
+                                @foreach ($dinas as $item)
+                                    @if (Auth::user()->level==3 || Auth::user()->level==4)
+                                        @php
+                                            $user=\App\User::where('id',Auth::user()->id)->with('user')->first();
+                                            $dinas_id=$user->user->dinas_id;
+                                        @endphp
+                                        @if ($dinas_id==$item->id)
+                                            <option value="{{$item->id}}" selected="selected">{{$item->nama_dinas}}</option>
+                                        @endif
+                                    @else
+                                        @if ($dinas_id==$item->id)
+                                            <option value="{{$item->id}}" selected="selected">{{$item->nama_dinas}}</option>
+                                        @else    
+                                            <option value="{{$item->id}}">{{$item->nama_dinas}}</option>
+                                        @endif    
+                                    @endif
+                                    
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-1 text-right">
+                            <select name="tahun" id="tahun" class="form-control text-left" data-plugin="select2" onchange="getdata()">
+                                @for ($i = (date('Y')); $i >= (date('Y')-5); $i--)
+                                    @if ($tahun==$i)
+                                        <option value="{{$i}}" selected="selected"}}>{{$i}}</option>
+                                    @else
+                                        <option value="{{$i}}">{{$i}}</option>
+                                    @endif
+                                @endfor
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:5px;">
+                                <div class="col-md-8">&nbsp;</div>
+                                
+                                <div class="col-md-4 text-right">
+                                    <select name="bidang" id="bidang" class="form-control text-left" data-plugin="select2" onchange="getdata()">
+                                    <option value="">-- Pilih Bidang Pengawasan --</option>
+                                        @foreach ($bidang as $item)
+                                            @if ($item->id==$pengawasan_id)
+                                                <option value="{{$item->id}}" selected="selected">{{$item->bidang}}</option>
+                                            @else
+                                                <option value="{{$item->id}}">{{$item->bidang}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                {{-- @endif --}}
+            </header>
+            
 			<hr class="widget-separator">
 			<div class="widget-body">
+                
 				<div class="table-responsive">
-					<table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%" data-plugin="DataTable">
-                        <thead>
-                            <tr>
-                                <th class="text-center" rowspan="2" style="width:15px;">#</th>
-                                <th class="text-center" rowspan="2">Bidang Pengawasan<br>No & Tgl LHP</th>
-                                <th class="text-center" rowspan="2">Temuan / Penyebab<br>(Uraian Ringkas)</th>
-                                <th class="text-center" colspan="2">Kode</th>
-                                <th class="text-center" rowspan="2">Rekomendasi<br>(Uraian Ringkas)</th>
-                                <th class="text-center" rowspan="2">Kode Rekomendasi</th>
-                                @if (Auth::user()->level==3)
-                                    <th class="text-center" rowspan="2">Tanggapan</th>
-                                @else
-                                    <th class="text-center" rowspan="2">Status</th>
-                                @endif
-                                <th class="text-center" rowspan="2">Aksi</th>
-                            </tr>
-                            <tr>
-                                <th class="text-center">Temuan</th>
-                                <th class="text-center">Sebab</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>
-                                        Audit Kinerja <br>
-                                        700.138/08-Insp/I/2017 <br>
-                                        29 Mei 2017
-                                    </td>
-                                    <td>
-                                        Terdapat 2 orang Pejabat belum membuat Program Kerja, yaitu sebagai berikut:
-                                        <br>
-                                        - Kepala Sub Bidang Keuangan <br>
-                                        - Kepala Sub Bidang Administratif <br>
-                                        <br>
-                                        Penyebab: <br>
-                                        Pejabat yang bersangkutan belum menaati peraturan yang berlaku.
-                                    </td>
-                                    <td>03</td>
-                                    <td>104</td>
-                                    <td>
-                                        Kepala Dinas secara tertulis memerintahkan agar segera membuat Program Kerja Tahunan untuk Tahun Anggaran 2017.
-                                    </td>
-                                    <td>050</td>
-                                    @if (Auth::user()->level==3)
-                                        <td><i style="color:red;">Belum Ada</i></td>
-                                    @else
-                                        <td><i style="color:green;">Sudah Verifikasi</i></td>
-                                    @endif
-                                    <td style="display:flex;">
-                                        @if (Auth::user()->level==3)
-                                            <span data-toggle="tooltip" data-title="Tanggapan">
-                                                <a href="{{ route('tindak-lanjut.index') }}" class="btn btn-xs btn-success" style="height:24px !important;">
-                                                    <i class="fa fa-volume-up"></i>
-                                                </a>
-                                            </span>&nbsp;
-                                            <span data-toggle="tooltip" data-title="Detail">
-                                                <a class="btn btn-xs btn-primary" style="height:24px !important;">
-                                                    <i class="fa fa-list"></i>
-                                                </a>
-                                            </span>
-                                        @endif
-                                        @if (Auth::user()->level==1)
-                                            <span data-toggle="tooltip" data-title="Verifikasi">
-                                                <a href="" class="btn btn-xs btn-success" style="height:24px !important;">
-                                                    <i class="fa fa-check"></i>
-                                                </a>
-                                            </span>&nbsp;
-                                        @endif
-                                        @if (Auth::user()->level==2 || Auth::user()->level==1)
-                                            <span data-toggle="tooltip" data-title="Ubah">
-                                                <a href="" class="btn btn-xs btn-warning" style="height:24px !important;">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                            </span>&nbsp;
-                                            <span data-toggle="tooltip" data-title="Hapus">
-                                                <a href="" class="btn btn-xs btn-danger" style="height:24px !important;">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </span>
-                                        @endif
-                                    </td>
-                                </tr>
-                        </tbody>
-                    </table>
-				</div>
-			</div><!-- .widget-body -->
-		</div><!-- .widget -->
-	</div>
+                    
+                    <div class="row" style="">
+                        <div class="col-md-12">
+                            
+                            <div id="data">
+                                <div class="text-center"><h4>Silahkan Pilih Data OPD, Tahun Pemeriksaan dan Bidang Pengawasan Terlebih Dahulu</h4></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
-
 @section('footscript')
+    <link rel="stylesheet" href="{{asset('theme/backend/libs/misc/datatables/datatables.min.css')}}"/>
+    <script src="{{asset('theme/backend/libs/misc/datatables/datatables.min.js')}}"></script>
 	<script>
-		// binding data to modal edit
-        $('#table').on('click', '.btn-edit', function(){
-            var id = $(this).data('value')
-			
-            $.ajax({
-                url: "{{ url('users') }}/"+id+"/edit",
-                success: function(res) {
-					$('#form-update').attr('action', "{{ url('users') }}/"+id)
+        // loaddata(-1,-1);
+        var dinas_id='{{$dinas_id}}';
+        var tahun='{{$tahun}}';
+        var pengawasan_id='{{$pengawasan_id}}';
+        if(dinas_id!='' && tahun!='' && pengawasan_id!='')
+        {
+            loaddata(dinas_id,tahun,pengawasan_id);
+        }
 
-					$('#name').val(res.name)
-					$('#nip').val(res.nip)
-					$('#email').val(res.email)
-					$('#password').val(res.password)
-					$('#password_confirmation').val(res.password)
-					$('#level').val(res.level)
-					$('#flag').val(res.flag)
-					$('#dinas_id').val(res.user.dinas_id)
-                    $('#pangkat').val(res.pangkat)
-					$('#golongan').val(res.golongan)
-					$('#jabatan').val(res.jabatan)
-                }
-            })
-        })
-
-		// delete action
-        $('#table').on('click', '.btn-delete', function(){
-            var id = $(this).data('value')
-			$('#form-delete').attr('action', "{{ url('users') }}/"+id)			
-        })
-	</script>
+        function getdata()
+        {
+            var dinas_id=$('#dinas_id').val();
+            var tahun=$('#tahun').val();
+            var bidang=$('#bidang').val();
+            loaddata(dinas_id,tahun,bidang);
+        }
+        function loaddata(dinas_id,tahun,bidang)
+        {
+            if(bidang!='')
+            {
+                $('#data').load('{{url("list-temuan-data")}}/'+dinas_id+'/'+tahun+'/'+bidang,function(){
+                    $('#table').DataTable();
+                });
+            }
+            else
+            {
+                $('#data').load('{{url("list-temuan-data")}}/'+dinas_id+'/'+tahun,function(){
+                    $('#table').DataTable();
+                });
+            }
+            
+        }
+        function hapusdetail(id)
+        {
+            $('#iddetail').val(id);
+            $('#modalhapus').modal('show');
+        }
+        function verifikasi(id)
+        {
+            $('#iddetailverif').val(id);
+            $('#modalverifikasi').modal('show');
+        }
+    </script>
+    <style>
+    .form-inline .btn
+    {
+        height:24px !important;
+    }
+    </style>
 @endsection

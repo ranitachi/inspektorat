@@ -1,6 +1,8 @@
-<header class="widget-header" style="margin-top:0px !important;padding-top:0px !important;">
-	<a href="{{url('detail-form/'.(isset($daftar[0]->id) ? $daftar[0]->id : '-1').'/'.$dinas_id.'/'.$tahun.'/'.$bidang_id)}}" class="btn btn-success btn-xs pull-right">+ Tambah Detail</a>
-</header>
+@if (Auth::user()->level!=1)
+	<header class="widget-header" style="margin-top:0px !important;padding-top:0px !important;">
+		<a href="{{url('detail-form/'.(isset($daftar[0]->id) ? $daftar[0]->id : '-1').'/'.$dinas_id.'/'.$tahun.'/'.$bidang_id)}}" class="btn btn-success btn-xs pull-right">+ Tambah Detail</a>
+	</header>
+@endif
 <table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%">
 	<thead>
 		<tr>
@@ -15,6 +17,7 @@
 			@else
 				<th class="text-center" rowspan="2">Status</th>
 			@endif
+			<th class="text-center" rowspan="2">Harus Selesai<br>Tanggal</th>
 			<th class="text-center" rowspan="2">Aksi</th>
         </tr>
         <tr>
@@ -31,12 +34,12 @@
 					<tr>
 						<td>{{ $key = $key + 1 }}</td>
 						<td>
-							@if ($key==1)
+							{{-- @if ($key==1) --}}
 								{{$uss->pengawasan->bidang}}
 								<br><br>
 								No : {{$uss->no_pengawasan}}<br>
 								Tgl : {{date('d/m/Y',strtotime($uss->tgl_pengawasan))}}<br>
-							@endif
+							{{-- @endif --}}
 						</td>
 						<td>
 							{!! $us->uraian_temuan !!}
@@ -73,7 +76,20 @@
 								@endif
 							@endif
 						</td>
-						<td>
+						<td class="text-center">
+							@php
+								$tglbatas=adddate($uss->tgl_pengawasan,60);
+								$selisih=selisihhari(date('Y-m-d'),$tglbatas,0);
+								// echo $selisih;
+							@endphp
+							@if ($selisih<=7)
+								<button class="btn btn-xs btn-danger" style="height:24px !important;"><i class="fa fa-Example of fa-exclamation-triangle"></i> {{$selisih}} Hari Lagi</button>
+							@else
+								<button class="btn btn-xs btn-info" style="height:24px !important;"><i class="fa fa-calendar"></i> {{date('d/m/Y',strtotime($tglbatas))}}</button>	
+							@endif
+							
+						</td>
+						<td class="text-center">
 							<div style="width:80px">
 								@if (Auth::user()->level==2)
 									<a class="btn btn-xs btn-info btn-edit" href="{{url('list-temuan/'.$us->id.'/edit')}}" style="height:24px !important;">

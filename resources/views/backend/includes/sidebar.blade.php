@@ -49,9 +49,9 @@
             <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
           </a>
           <ul class="submenu" style="{{$url=='data-temuan' || $url=='data-penyebab' || $url=='data-rekomendasi' || $url=='bidang-pengawasan' ? 'display:block' : ''}}">
-            <li class="{{$url=='data-temuan'  ? 'active open' : ''}}"><a href="{{url('data-temuan')}}"><span class="menu-text">Kelompok Temuan</span></a></li>
+            <li class="{{$url=='data-temuan'  ? 'active open' : ''}}"><a href="{{url('data-temuan')}}"><span class="menu-text">Kode Temuan</span></a></li>
             <li class="{{$url=='data-penyebab' ? 'active open' : ''}}"><a href="{{url('data-penyebab')}}"><span class="menu-text">Kelompok Penyebab</span></a></li>
-            <li class="{{$url=='data-rekomendasi' ? 'active open' : ''}}"><a href="{{url('data-rekomendasi')}}"><span class="menu-text">Kelompok Rekomendasi</span></a></li>
+            <li class="{{$url=='data-rekomendasi' ? 'active open' : ''}}"><a href="{{url('data-rekomendasi')}}"><span class="menu-text">Kode Rekomendasi</span></a></li>
             <li class="{{$url=='bidang-pengawasan' ? 'active open' : ''}}"><a href="{{url('bidang-pengawasan')}}"><span class="menu-text">Bidang Pengawasan</span></a></li>
           </ul>
         </li>
@@ -63,6 +63,16 @@
           </a>
           <ul class="submenu" style="{{strpos($url,'list-temuan')!==false ? 'display:block' : ''}}">
             <li class="{{$url=='list-temuan' ? 'active' : ''}}"><a href="{{url('list-temuan')}}"><span class="menu-text">List Temuan</span></a></li>
+          </ul>
+        </li>
+        <li class="has-submenu {{strpos($url,'laporan')!==false ? 'active open' : ''}}">
+          <a href="javascript:void(0)" class="submenu-toggle">
+            <i class="menu-icon fa fa-archive"></i>
+            <span class="menu-text">Laporan</span>
+            <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
+          </a>
+          <ul class="submenu" style="{{strpos($url,'rekap-temuan')!==false ? 'display:block' : ''}}">
+            <li class="{{$url=='rekap-temuan' ? 'active' : ''}}"><a href="{{url('rekap-temuan')}}"><span class="menu-text">Rekap Temuan</span></a></li>
           </ul>
         </li>
         <li class="has-submenu {{$url=='users' ? 'active open' : ''}}">

@@ -66,7 +66,7 @@
 	<div class="col-md-12">
 		<div class="widget">
 			<header class="widget-header">
-				<span class="widget-title">Daftar Termuan</span>
+				<span class="widget-title">Daftar Temuan</span>
                 
                 {{-- @if (!Auth::user()->level==1 || Auth::user()->level==2) --}}
                     <div class="row">

@@ -17,7 +17,7 @@
 							<input name="code" type="text" class="form-control" placeholder="Code">
 						</div>
 						<div class="form-group">
-							<input name="sebab" type="text" class="form-control" placeholder="Kelompok Temuan">
+							<input name="sebab" type="text" class="form-control" placeholder="Kode Temuan">
 						</div>
 						<div class="form-group">
 							<textarea name="desc" class="form-control" placeholder="Keterangan"></textarea>
@@ -55,7 +55,7 @@
 							<input id="code" name="code" type="text" class="form-control" placeholder="Code">
 						</div>
 						<div class="form-group">
-							<input id="sebab" name="sebab" type="text" class="form-control" placeholder="Kelompok Temuan">
+							<input id="sebab" name="sebab" type="text" class="form-control" placeholder="Kode Temuan">
 						</div>
 						<div class="form-group">
 							<textarea id="desc" name="desc" class="form-control" placeholder="Keterangan"></textarea>
