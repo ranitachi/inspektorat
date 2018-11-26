@@ -1,4 +1,4 @@
-<div id="navbar-search" class="navbar-search collapse">
+{{-- <div id="navbar-search" class="navbar-search collapse">
   <div class="navbar-search-inner">
     <form action="#">
       <span class="search-icon"><i class="fa fa-search"></i></span>
@@ -9,4 +9,4 @@
     </button>
   </div>
   <div class="navbar-search-backdrop" data-toggle="collapse" data-target="#navbar-search" aria-expanded="false"></div>
-</div>
+</div> --}}
