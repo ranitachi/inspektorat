@@ -10,15 +10,25 @@ use App\Models\MasterBidangPengawasan;
 use App\Models\MasterTemuan;
 use App\Models\MasterSebab;
 use App\Models\MasterRekomendasi;
+
+use Auth;
+
 class DaftarTemuanController extends Controller
 {
     public function index()
     {
         $dinas=MasterDinas::all();
         $bidang=MasterBidangPengawasan::all();
-        return view('backend.pages.daftar-temuan.index')
-            ->with('dinas',$dinas)
-            ->with('bidang',$bidang);
+
+        if (Auth::user()->level==2) {
+            return view('backend.pages.daftar-temuan.index')
+                ->with('dinas',$dinas)
+                ->with('bidang',$bidang);
+        } else {
+            return view('backend.pages.list-temuan.index')
+                ->with('dinas',$dinas)
+                ->with('bidang',$bidang);
+        }
     }
 
     public function data($dinas_id=null,$tahun=null,$bidang_id=null)

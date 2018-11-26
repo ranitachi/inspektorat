@@ -6,11 +6,11 @@
       </div>
       <div class="media-body">
         <div class="foldable">
-          <h5><a href="javascript:void(0)" class="username">John Doe</a></h5>
+          <h5><a href="javascript:void(0)" class="username">Admin Utama</a></h5>
           <ul>
             <li class="dropdown">
               <a href="javascript:void(0)" class="dropdown-toggle usertitle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <small>Web Developer</small>
+                <small>Administrator Utama</small>
               </a>
               
             </li>
@@ -69,12 +69,6 @@
           <a href="{{url('users')}}">
             <i class="menu-icon fa fa-users"></i>
             <span class="menu-text">Data User</span>
-          </a>
-        </li>
-        <li class="{{$url=='list-temuan' ? 'active' : ''}}">
-          <a href="{{url('list-temuan')}}">
-            <i class="menu-icon fa fa-archive"></i>
-            <span class="menu-text">Daftar Temuan</span>
           </a>
         </li>
         <li class="menu-separator"><hr></li>

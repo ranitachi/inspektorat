@@ -6,11 +6,11 @@
       </div>
       <div class="media-body">
         <div class="foldable">
-          <h5><a href="javascript:void(0)" class="username">John Doe</a></h5>
+          <h5><a href="javascript:void(0)" class="username">Operator</a></h5>
           <ul>
             <li class="dropdown">
               <a href="javascript:void(0)" class="dropdown-toggle usertitle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <small>Web Developer</small>
+                <small>Akun Operator</small>
               </a>
               
             </li>
