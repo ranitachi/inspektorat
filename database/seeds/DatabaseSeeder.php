@@ -12,13 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        User::create([
-            'name' => 'Administrator',
-            'nip' => 123,
-            'email' => 'admin@email.com',
-            'password' => bcrypt('123'),
-            'flag' => 1,
-            'level' => 1
-        ]);
+        // $this->call(KelompokTemuanTableSeeder::class);
+        $this->call(RekomendasiTableSeeder::class);
     }
 }
