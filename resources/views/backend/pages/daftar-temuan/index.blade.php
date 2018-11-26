@@ -68,18 +68,29 @@
 			<header class="widget-header">
 				<span class="widget-title">Daftar Termuan</span>
                 
-                {{-- @if (!Auth::user()->level==3) --}}
+                {{-- @if (!Auth::user()->level==1 || Auth::user()->level==2) --}}
                     <div class="row">
                         <div class="col-md-8">&nbsp;</div>
                         <div class="col-md-3 text-right">
                             <select name="dinas_id" id="dinas_id" class="form-control text-left" data-plugin="select2" style="text-align:left !important" onchange="getdata()">
                                 <option value="">-- Pilih Dinas --</option>
                                 @foreach ($dinas as $item)
-                                    @if ($dinas_id==$item->id)
-                                        <option value="{{$item->id}}" selected="selected">{{$item->nama_dinas}}</option>
-                                    @else    
-                                        <option value="{{$item->id}}">{{$item->nama_dinas}}</option>
+                                    @if (Auth::user()->level==3 || Auth::user()->level==4)
+                                        @php
+                                            $user=\App\User::where('id',Auth::user()->id)->with('user')->first();
+                                            $dinas_id=$user->user->dinas_id;
+                                        @endphp
+                                        @if ($dinas_id==$item->id)
+                                            <option value="{{$item->id}}" selected="selected">{{$item->nama_dinas}}</option>
+                                        @endif
+                                    @else
+                                        @if ($dinas_id==$item->id)
+                                            <option value="{{$item->id}}" selected="selected">{{$item->nama_dinas}}</option>
+                                        @else    
+                                            <option value="{{$item->id}}">{{$item->nama_dinas}}</option>
+                                        @endif    
                                     @endif
+                                    
                                 @endforeach
                             </select>
                         </div>
