@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 @section('title')
-    <title>Data Kelompok Temuan</title>
+    <title>Data Kode Temuan</title>
 @endsection
 @section('modal')
 	<div class="modal fade" id="modaltambah" tabindex="-1" role="dialog">
@@ -8,7 +8,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Tambah Data Kelompok Temuan</h4>
+					<h4 class="modal-title">Tambah Data Kode Temuan</h4>
 				</div>
 				<div class="modal-body">
 					<form action="{{ route('data-temuan.store') }}" method="POST">
@@ -17,7 +17,7 @@
 							<input name="code" type="text" class="form-control" placeholder="Code">
 						</div>
 						<div class="form-group">
-							<input name="temuan" type="text" class="form-control" placeholder="Kelompok Temuan">
+							<input name="temuan" type="text" class="form-control" placeholder="Kode Temuan">
 						</div>
 						<div class="form-group">
 							<textarea name="decs" class="form-control" placeholder="Keterangan"></textarea>
@@ -45,7 +45,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Ubah Data Kelompok Temuan</h4>
+					<h4 class="modal-title">Ubah Data Kode Temuan</h4>
 				</div>
 				<div class="modal-body">
 					<form id="form-update" method="POST">
@@ -55,7 +55,7 @@
 							<input id="code" name="code" type="text" class="form-control" placeholder="Code">
 						</div>
 						<div class="form-group">
-							<input id="temuan" name="temuan" type="text" class="form-control" placeholder="Kelompok Temuan">
+							<input id="temuan" name="temuan" type="text" class="form-control" placeholder="Kode Temuan">
 						</div>
 						<div class="form-group">
 							<textarea id="desc" name="desc" class="form-control" placeholder="Keterangan"></textarea>
@@ -83,7 +83,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Konfirmasi Hapus Data Kelompok Temuan</h4>
+					<h4 class="modal-title">Konfirmasi Hapus Data Kode Temuan</h4>
 				</div>
 				<div class="modal-body">
 					<h5>Apakah anda yakin akan menghapus data ini?</h5>
@@ -105,7 +105,7 @@
 	<div class="col-md-12">
 		<div class="widget">
 			<header class="widget-header">
-				<span class="widget-title">Data Kelompok Temuan</span>
+				<span class="widget-title">Data Kode Temuan</span>
 				<a href="" class="btn btn-sm btn-success pull-right" data-toggle="modal" data-target="#modaltambah">+ Tambah Data</a>
 			</header><!-- .widget-header -->
 			<hr class="widget-separator">
@@ -116,7 +116,7 @@
 							<tr>
 								<th style="width:15px;">#</th>
 								<th>Kode</th>
-								<th>Kelompok Temuan</th>
+								<th>Kode Temuan</th>
 								<th>Flag</th>
 								<th>Aksi</th>
 							</tr>

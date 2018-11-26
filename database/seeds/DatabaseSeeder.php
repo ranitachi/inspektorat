@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Models\MasterDinas;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -13,6 +14,22 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UsersTableSeeder::class);
         // $this->call(KelompokTemuanTableSeeder::class);
-        $this->call(RekomendasiTableSeeder::class);
+        //$this->call(RekomendasiTableSeeder::class);
+
+        // User::create([
+        //     'name' => 'Administrator',
+        //     'nip' => 123,
+        //     'email' => 'admin@email.com',
+        //     'password' => bcrypt('123'),
+        //     'flag' => 1,
+        //     'level' => 1
+        // ]);
+
+        $din = MasterDinas::all();
+        foreach($din as $v)
+        {
+            $v->nama_slug=str_slug($v->nama_dinas);
+            $v->save();
+        }
     }
 }

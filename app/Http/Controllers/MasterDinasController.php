@@ -25,6 +25,7 @@ class MasterDinasController extends Controller
         $insert->singkatan = $request->singkatan;
         $insert->alamat = $request->alamat;
         $insert->flag = $request->flag;
+        $insert->nama_slug = str_slug($request->nama_dinas);
         $insert->save();
 
         return redirect()->route('data-opd.index')
@@ -48,6 +49,7 @@ class MasterDinasController extends Controller
         $update->singkatan = $request->singkatan;
         $update->alamat = $request->alamat;
         $update->flag = $request->flag;
+        $update->nama_slug = str_slug($request->nama_dinas);
         $update->save();
 
         return redirect()->route('data-opd.index')
