@@ -50,7 +50,7 @@
           </a>
           <ul class="submenu" style="{{$url=='data-temuan' || $url=='data-penyebab' || $url=='data-rekomendasi' || $url=='bidang-pengawasan' ? 'display:block' : ''}}">
             <li class="{{$url=='data-temuan'  ? 'active open' : ''}}"><a href="{{url('data-temuan')}}"><span class="menu-text">Kode Temuan</span></a></li>
-            <li class="{{$url=='data-penyebab' ? 'active open' : ''}}"><a href="{{url('data-penyebab')}}"><span class="menu-text">Kelompok Penyebab</span></a></li>
+            {{-- <li class="{{$url=='data-penyebab' ? 'active open' : ''}}"><a href="{{url('data-penyebab')}}"><span class="menu-text">Kelompok Penyebab</span></a></li> --}}
             <li class="{{$url=='data-rekomendasi' ? 'active open' : ''}}"><a href="{{url('data-rekomendasi')}}"><span class="menu-text">Kode Rekomendasi</span></a></li>
             <li class="{{$url=='bidang-pengawasan' ? 'active open' : ''}}"><a href="{{url('bidang-pengawasan')}}"><span class="menu-text">Bidang Pengawasan</span></a></li>
           </ul>

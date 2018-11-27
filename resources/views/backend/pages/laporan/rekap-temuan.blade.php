@@ -22,8 +22,8 @@
                                 <th class="text-center" colspan="4">Status</th>
                             </tr>
                             <tr>
-                                <th class="text-center">Selesai</th>
                                 <th class="text-center">Baru Masuk</th>
+                                <th class="text-center">Selesai</th>
                                 <th class="text-center">7 Hari Batas Akhir<br> Tindak Lanjut</th>
                                 <th class="text-center">&gt; 60 Hari</th>
                             </tr>
@@ -41,16 +41,16 @@
                                         <button class="btn btn-sm btn-info" style="height:24px !important;padding-top:0px !important;">2</button>
                                     </td>
                                     <td class="text-center">
-                                        <button class="btn btn-sm btn-success" style="height:24px !important;padding-top:0px !important;">1</button>
+                                        <button class="btn btn-sm btn-default" style="height:24px !important;padding-top:0px !important;background:#ccc;">0</button>
                                     </td>
                                     <td class="text-center">
-                                        <button class="btn btn-sm btn-default" style="height:24px !important;padding-top:0px !important;background:#ccc;">0</button>
+                                        <button class="btn btn-sm btn-success" style="height:24px !important;padding-top:0px !important;">1</button>
                                     </td>
                                     <td class="text-center">
                                         <button class="btn btn-sm btn-warning" style="height:24px !important;padding-top:0px !important;">1</button>
                                     </td>
                                     <td class="text-center">
-                                        <button class="btn btn-sm btn-danger" style="height:24px !important;padding-top:0px !important;">1</button>
+                                        <button class="btn btn-sm btn-danger" style="height:24px !important;padding-top:0px !important;">0</button>
                                     </td>
                                 </tr>
                                 @php

@@ -9,20 +9,16 @@
 			<th class="text-center" rowspan="2" style="width:15px;">#</th>
 			<th class="text-center" rowspan="2">Bidang Pengawasan<br>No & Tgl LHP</th>
 			<th class="text-center" rowspan="2">Temuan / Penyebab<br>(Uraian Ringkas)</th>
-			<th class="text-center" colspan="2">Kode</th>
+			<th class="text-center" rowspan="2">Kode Temuan</th>
 			<th class="text-center" rowspan="2">Rekomendasi<br>(Uraian Ringkas)</th>
 			<th class="text-center" rowspan="2">Kode Rekomendasi</th>
 			@if (Auth::user()->level==3)
-				<th class="text-center" rowspan="2">Tanggapan</th>
+				<th class="text-center" rowspan="2">Tindak Lanjut</th>
 			@else
 				<th class="text-center" rowspan="2">Status</th>
 			@endif
 			<th class="text-center" rowspan="2">Harus Selesai<br>Tanggal</th>
 			<th class="text-center" rowspan="2">Aksi</th>
-        </tr>
-        <tr>
-            <th class="text-center">Temuan</th>
-            <th class="text-center">Sebab</th>
         </tr>
 	</thead>
 	<tbody>
@@ -43,12 +39,8 @@
 						</td>
 						<td>
 							{!! $us->uraian_temuan !!}
-							<br><br>
-							<b>Penyebab : </b><br>
-							{!! $us->penyebab !!}
 						</td>
 						<td class="text-center">{{$us->temuan->code}}</td>
-						<td class="text-center">{{$us->sebab->code}}</td>
 						<td>{!! $us->uraian_rekomendasi !!}</td>
 						<td class="text-center">{{$us->rekomendasi->code}}</td>
 						<td class="text-left">
@@ -60,7 +52,7 @@
 									<a href="javascript:verifikasi({{$us->id}})" class="btn btn-xs btn-info"><i class="fa fa-check"></i> Verifikasi</a>
 								@elseif ($us->flag==2)
 									<span class="label label-success"><i class="fa fa-check"></i> Verifikasi</span>
-									<span class="label label-info">Belum Ditanggapi OPD</span>
+									<span class="label label-info">Belum Tindak Lanjut</span>
 								@else
 									<span class="label label-success"><i class="fa fa-eye"></i> Lihat Tanggapan</span>
 								@endif
@@ -70,10 +62,12 @@
 									<span class="label label-danger">Menunggu Verifikasi</span>
 								@elseif ($us->flag==2)
 									<span class="label label-success"><i class="fa fa-check"></i> Verifikasi</span>
-									<span class="label label-info">Belum Ditanggapi OPD</span>
+									<span class="label label-info">Belum Tindak Lanjut</span>
 								@else
 									<span class="label label-success"><i class="fa fa-eye"></i> Lihat Tanggapan</span>
 								@endif
+							@elseif(Auth::user()->level==3)
+								<a href="{{ route('tindak-lanjut.index') }}">Belum ada tindak lanjut</a>
 							@endif
 						</td>
 						<td class="text-center">

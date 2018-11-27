@@ -35,7 +35,7 @@
     <div class="col-md-12" style="margin-top:20px;">
 		<div class="widget">
 			<header class="widget-header">
-				<span class="widget-title">Formulir Tambah Kerjasama</span>
+				<span class="widget-title">Formulir Tindak Lanjut</span>
             </header><!-- .widget-header -->
 			<hr class="widget-separator">
 			<div class="widget-body">
@@ -43,7 +43,7 @@
                     @csrf
                     
                     <div class="form-group">
-                        <label for="exampleTextInput1" class="col-sm-2 control-label">Tanggapan Temuan</label>
+                        <label for="exampleTextInput1" class="col-sm-2 control-label">Tindak Lanjut Temuan</label>
                         <div class="col-sm-10">
                             <textarea name="tanggapan" id="ckeditor" cols="30" rows="10"></textarea>
                         </div>
