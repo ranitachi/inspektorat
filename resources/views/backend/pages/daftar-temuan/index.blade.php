@@ -146,6 +146,7 @@
 @section('footscript')
     <link rel="stylesheet" href="{{asset('theme/backend/libs/misc/datatables/datatables.min.css')}}"/>
     <script src="{{asset('theme/backend/libs/misc/datatables/datatables.min.js')}}"></script>
+    <script src="{{asset('theme/backend/libs/misc/flot/jquery.flot.tooltip.min.js')}}"></script>
 	<script>
         // loaddata(-1,-1);
         var dinas_id='{{$dinas_id}}';
@@ -169,6 +170,7 @@
             {
                 $('#data').load('{{url("list-temuan-data")}}/'+dinas_id+'/'+tahun+'/'+bidang,function(){
                     $('#table').DataTable();
+                    $('[data-toggle="tooltip"]').tooltip();
                 });
             }
             
