@@ -11,7 +11,6 @@ class CreateUsersTable extends Migration
      *  1. administrator
      *  2. operator
      *  3. admin opd
-     *  4. kepala opd
      * @return void
      */
     public function up()
