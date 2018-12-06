@@ -41,13 +41,12 @@ class DaftarTemuanController extends Controller
         {
             $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
         }
-        $detail=DetailTemuan::with(['daftar','temuan','sebab','rekomendasi'])->get();
+        $detail=DetailTemuan::with(['daftar','temuan','sebab','rekomendasi','tindak_lanjut_temuan'])->get();
         $det=array();
         foreach($detail as $k=>$v)
         {
             $det[$v->daftar_id][]=$v;
         }
-        // dd($det);
         return view('backend.pages.daftar-temuan.data')
             ->with('det',$det)
             ->with('dinas_id',$dinas_id)

@@ -14,6 +14,11 @@ class DetailTemuan extends Model
     
     ];
 
+    public function tindak_lanjut_temuan() 
+    {
+        return $this->hasOne('App\Models\TindakLanjutTemuan', 'detail_id');
+    }
+
     function daftar()
     {
         return $this->belongsTo('App\Models\DaftarTemuan','daftar_id');

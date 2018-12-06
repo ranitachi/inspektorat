@@ -26,7 +26,14 @@ Route::resource('data-penyebab','MasterSebabController')->middleware('auth');
 Route::resource('data-rekomendasi','MasterRekomendasiController')->middleware('auth');
 Route::resource('bidang-pengawasan','MasterBidangPengawasanController')->middleware('auth');
 Route::resource('users','UsersController')->middleware('auth');
+
 Route::get('tindak-lanjut/{id}', 'TindakLanjutTemuanController@index')->name('tindak-lanjut.index');
+Route::post('tindak-lanjut', 'TindakLanjutTemuanController@store')->name('tindak-lanjut.store');
+Route::get('tindak-lanjut/{id}/edit', 'TindakLanjutTemuanController@edit')->name('tindak-lanjut.edit');
+Route::get('tindak-lanjut/download/{filename}', 'TindakLanjutTemuanController@download')->name('tindak-lanjut.download');
+Route::put('tindak-lanjut/{id}/update', 'TindakLanjutTemuanController@update')->name('tindak-lanjut.update');
+Route::get('tindak-lanjut/{id}/show', 'TindakLanjutTemuanController@show')->name('tindak-lanjut.show');
+Route::get('tindak-lanjut/{id}/selesai', 'TindakLanjutTemuanController@selesai')->name('tindak-lanjut.selesai');
 
 Route::get('rekap-temuan','LaporanTemuanController@index')->middleware('auth');
 Route::get('rekap-temuan-detail/{opd}','LaporanTemuanController@rekapdetail')->middleware('auth');

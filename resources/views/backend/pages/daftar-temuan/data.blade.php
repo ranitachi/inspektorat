@@ -54,7 +54,7 @@
 									<span class="label label-success"><i class="fa fa-check"></i> Verifikasi</span>
 									<span class="label label-info">Belum Tindak Lanjut</span>
 								@else
-									<span class="label label-success"><i class="fa fa-eye"></i> Lihat Tanggapan</span>
+									<a href="{{ route('tindak-lanjut.show', $us->tindak_lanjut_temuan->id) }}" style="color:green;">Telah Ditindaklanjuti</a>
 								@endif
 							@elseif(Auth::user()->level==2)
 						
@@ -67,7 +67,11 @@
 									<span class="label label-success"><i class="fa fa-eye"></i> Lihat Tanggapan</span>
 								@endif
 							@elseif(Auth::user()->level==3)
-								<a href="{{ route('tindak-lanjut.index', $us->id) }}">Belum ada tindak lanjut</a>
+								@if ($us->flag==2)
+									<a href="{{ route('tindak-lanjut.index', $us->id) }}" style="color:red;">Belum ada tindak lanjut</a>
+								@elseif($us->flag==3)
+									<a href="{{ route('tindak-lanjut.edit', $us->id) }}" style="color:green;">Telah Ditindaklanjuti</a>
+								@endif
 							@endif
 						</td>
 						<td class="text-center">

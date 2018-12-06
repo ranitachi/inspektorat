@@ -5,6 +5,24 @@
 @endsection
 
 @section('content')
+    <div class="col-md-12">
+        @if ($temuan->flag==3)
+            <div class="alert alert-info" role="alert">
+                <strong>--> STATUS TEMUAN: DALAM PROSES. </strong>
+                <br><br>
+                <span>Silahkan klik tombol di bawah ini untuk mengubah status temuan menjadi <strong>SELESAI</strong>.</span>
+                <br><br>
+                <a href="{{ route('tindak-lanjut.selesai', $temuan->id) }}" class="btn btn-success btn-xs">SELESAI</a>
+            </div>
+        @elseif($temuan->flag==4)
+            <div class="alert alert-success" role="alert">
+                <strong>--> STATUS TEMUAN: SELESAI. </strong>
+                <br><br>
+                <span>Status temuan untuk data LHP ini telah dinyatakan: <strong>SELESAI</strong>.</span>
+            </div>
+        @endif
+    </div>
+
 	<div class="col-md-12">
         <div class="promo-footer" style="background:#fff;">
             <div class="row no-gutter">
@@ -68,17 +86,21 @@
     <div class="col-md-12">
 		<div class="widget">
 			<header class="widget-header">
-				<span class="widget-title">Formulir Tindak Lanjut</span>
+				<span class="widget-title">Hasil Tindak Lanjut</span>
             </header><!-- .widget-header -->
 			<hr class="widget-separator">
 			<div class="widget-body">
-                <form class="form-horizontal" action="{{ route('tindak-lanjut.store') }}" method="POST" enctype="multipart/form-data">
+                <form class="form-horizontal" action="#" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <input type="hidden" name="detail_id" value="{{ $temuan->id }}">
                     <div class="form-group">
                         <label for="exampleTextInput1" class="col-sm-2 control-label">Tindak Lanjut Temuan</label>
                         <div class="col-sm-10">
-                            <textarea name="tindak_lanjut" id="ckeditor" cols="30" rows="10"></textarea>
+                            <blockquote style="font-size:12px;">
+                                {!! $tindaklanjut->tindak_lanjut !!}
+                            </blockquote>
+                            {{-- <textarea name="tindak_lanjut" id="ckeditor" cols="30" rows="10">{{ $tindaklanjut->tindak_lanjut }}</textarea> --}}
                         </div>
                     </div>
                     <div class="form-group">
@@ -89,35 +111,21 @@
                                     <tr>
                                         <td style="width:15px;">#</td>
                                         <td>Nama Dokumen</td>
-                                        <td>Upload File</td>
+                                        <td>Uploaded File</td>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><input type="checkbox" class="form-control check"></td>
-                                        <td><input type="text" class="form-control" name="nama_dokumen[]" required></td>
-                                        <td><input type="file" class="form-control" name="path[]" required></td>
-                                    </tr>
+                                    @foreach ($tindaklanjut->dokumen_tindak_lanjut as $dk)
+                                        <tr id="trid{{ $dk->id }}">
+                                            <td><i class="fa fa-arrow-right text-primary"></i></td>
+                                            <td>{{ $dk->nama_dokumen }}</td>
+                                            <td>
+                                                <a href="{{ route('tindak-lanjut.download', $dk->path) }}" download>Download Dokumen</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
-                            <table class="table table-bordered">
-                                <tr>
-                                    <td colspan="3" class="text-right">
-                                        <a style="cursor:pointer;" id="tambah_dokumen">
-                                            <i class="fa fa-plus text-success"></i> &nbsp;Tambah Baris
-                                        </a>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a style="cursor:pointer;" id="hapus_dokumen">
-                                            <i class="fa fa-minus text-danger"></i> &nbsp;Hapus Baris
-                                        </a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-10 col-sm-offset-2">
-                            <button type="submit" class="btn btn-success">Simpan</button>
                         </div>
                     </div>
                 </form>
