@@ -35,7 +35,15 @@ class DaftarTemuanController extends Controller
     {
         if($bidang_id!=null)
         {
-            $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun,'pengawasan_id'=>$bidang_id])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+            if($dinas_id==-1)
+                $daftar=DaftarTemuan::with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+            else
+            {
+                if($tahun==-1 && $bidang_id==-1)
+                    $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+                else
+                    $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun,'pengawasan_id'=>$bidang_id])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+            }
         }
         else
         {

@@ -38,19 +38,19 @@
                                     <td class="text-center">{{$no}}</td>
                                     <td class="text-left"><a href="{{url('rekap-temuan-detail/'.str_slug($item->nama_dinas))}}">{{$item->nama_dinas}}</a></td>
                                     <td class="text-center">
-                                        <button class="btn btn-sm btn-info" style="height:24px !important;padding-top:0px !important;">2</button>
+                                        <button class="btn btn-sm btn-info" style="height:24px !important;padding-top:0px !important;">{{isset($d[$item->id]) ? count($d[$item->id]) : 0}}</button>
                                     </td>
                                     <td class="text-center">
-                                        <button class="btn btn-sm btn-success" style="height:24px !important;padding-top:0px !important;">1</button>
+                                        <button class="btn btn-sm btn-success" style="height:24px !important;padding-top:0px !important;">{{isset($selesai[$item->id]) ? count($selesai[$item->id]) : 0}}</button>
                                     </td>
                                     <td class="text-center">
-                                        <button class="btn btn-sm btn-default" style="height:24px !important;padding-top:0px !important;background:#ccc;">0</button>
+                                        <button class="btn btn-sm btn-default" style="height:24px !important;padding-top:0px !important;background:#ccc;">{{isset($baru[$item->id]) ? count($baru[$item->id]) : 0}}</button>
                                     </td>
                                     <td class="text-center">
-                                        <button class="btn btn-sm btn-warning" style="height:24px !important;padding-top:0px !important;">1</button>
+                                        <button class="btn btn-sm btn-warning" style="height:24px !important;padding-top:0px !important;">{{isset($tujuh[$item->id]) ? count($tujuh[$item->id]) : 0}}</button>
                                     </td>
                                     <td class="text-center">
-                                        <button class="btn btn-sm btn-danger" style="height:24px !important;padding-top:0px !important;">1</button>
+                                        <button class="btn btn-sm btn-danger" style="height:24px !important;padding-top:0px !important;">{{isset($enampuluh[$item->id]) ? count($enampuluh[$item->id]) : 0}}</button>
                                     </td>
                                 </tr>
                                 @php

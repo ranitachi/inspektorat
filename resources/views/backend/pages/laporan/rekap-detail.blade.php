@@ -36,7 +36,39 @@
                         </thead>
 
                         <tbody>
-                                <tr>
+                        @php
+                            $no=1;
+                        @endphp
+                        @foreach ($daftar as $uss)
+                            @if (isset($det[$uss->id]))
+                            
+                                @foreach ($det[$uss->id] as $key=>$us)
+                                
+                                    <tr>
+                                        <td>{{ $key = $key + 1 }}</td>
+                                        <td>
+                                                {{$uss->pengawasan->bidang}}
+                                                <br><br>
+                                                No : {{$uss->no_pengawasan}}<br>
+                                                Tgl : {{date('d/m/Y',strtotime($uss->tgl_pengawasan))}}<br>
+                                           
+                                        </td>
+                                        <td>
+                                            {!! $us->uraian_temuan !!}
+                                            <br><br>
+                                            <b>Penyebab : </b><br>
+                                            {!! $us->penyebab !!}
+                                        </td>
+                                        <td class="text-center">{{$us->temuan->code}}</td>
+                                        <td class="text-center">{{$us->sebab->code}}</td>
+                                        <td>{!! $us->uraian_rekomendasi !!}</td>
+                                        <td class="text-center">{{$us->rekomendasi->code}}</td>
+                                        <td class="text-center">{!!$hasil!!}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                    @endforeach
+                                {{-- <tr>
                                     <td>1</td>
                                     <td>
                                         Audit Kinerja <br>
@@ -90,7 +122,7 @@
                                    
                                     <td><button class="btn btn-xs btn-warning" style="height:24px !important;">7 Hari Lagi Batas Akhir Tindak Lanjut</button></td>
                                     
-                                </tr>
+                                </tr> --}}
                         </tbody>
                     </table>
 				</div>

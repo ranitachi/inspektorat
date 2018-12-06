@@ -4,14 +4,35 @@
 	<title>Dashboard</title>
 @endsection
 @section('content')
-	
+	@php
+		$daftar=\App\Models\DaftarTemuan::all();
+        $d=$selesai=$baru=$tujuh=$enampuluh=array();
+        foreach($daftar as $k=>$v)
+        {
+            $selisih=selisihhari($v->created_at,date('Y-m-d'));
+            $d[]=$v;
+            if($v->flag==1)
+                $selesai[]=$v;
+            else
+            {
+                if($selisih<=7)
+                    $baru[]=$v;
+                
+                if($selisih>43 && $selisih<=60)
+                    $tujuh[]=$v;
+                
+                if($selisih>60)
+                    $enampuluh[]=$v;
+            }
+        }
+	@endphp
 	<div class="col-md-12">
 		<div class="row">
 			<div class="col-md-3 col-sm-6">
 				<div class="widget stats-widget">
 					<div class="widget-body clearfix">
 						<div class="pull-left">
-							<h3 class="widget-title text-primary"><span class="counter" data-plugin="counterUp">4</span></h3>
+							<h3 class="widget-title text-primary"><span class="counter" data-plugin="counterUp">{{$daftar->count()}}</span></h3>
 							<small class="text-color">Total Temuan</small>
 						</div>
 						<span class="pull-right big-icon watermark"><i class="fa fa-paperclip"></i></span>
@@ -27,7 +48,7 @@
 				<div class="widget stats-widget">
 					<div class="widget-body clearfix">
 						<div class="pull-left">
-							<h3 class="widget-title text-danger"><span class="counter" data-plugin="counterUp">2</span></h3>
+							<h3 class="widget-title text-danger"><span class="counter" data-plugin="counterUp">{{count($enampuluh)}}</span></h3>
 							<small class="text-color">Jumlah Temuan</small>
 						</div>
 						<span class="pull-right big-icon watermark"><i class="fa fa-ban"></i></span>
@@ -43,7 +64,7 @@
 				<div class="widget stats-widget">
 					<div class="widget-body clearfix">
 						<div class="pull-left">
-							<h3 class="widget-title text-success"><span class="counter" data-plugin="counterUp">1</span></h3>
+							<h3 class="widget-title text-success"><span class="counter" data-plugin="counterUp">{{count($selesai)}}</span></h3>
 							<small class="text-color">Jumlah Temuan</small>
 						</div>
 						<span class="pull-right big-icon watermark"><i class="fa fa-unlock-alt"></i></span>
@@ -59,7 +80,7 @@
 				<div class="widget stats-widget">
 					<div class="widget-body clearfix">
 						<div class="pull-left">
-							<h3 class="widget-title text-warning"><span class="counter" data-plugin="counterUp">1</span></h3>
+							<h3 class="widget-title text-warning"><span class="counter" data-plugin="counterUp">{{count($tujuh)}}</span></h3>
 							<small class="text-color">Jumlah temuan</small>
 						</div>
 						<span class="pull-right big-icon watermark"><i class="fa fa-file-text-o"></i></span>

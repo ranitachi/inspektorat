@@ -1,4 +1,4 @@
-@if (Auth::user()->level!=1)
+@if (Auth::user()->level!=1 && Auth::user()->level!=3)
 	<header class="widget-header" style="margin-top:0px !important;padding-top:0px !important;">
 		<a href="{{url('detail-form/'.(isset($daftar[0]->id) ? $daftar[0]->id : '-1').'/'.$dinas_id.'/'.$tahun.'/'.$bidang_id)}}" class="btn btn-success btn-xs pull-right">+ Tambah Detail</a>
 	</header>
@@ -18,7 +18,9 @@
 				<th class="text-center" rowspan="2">Status</th>
 			@endif
 			<th class="text-center" rowspan="2">Harus Selesai<br>Tanggal</th>
+			@if (Auth::user()->level!=3)
 			<th class="text-center" rowspan="2">Aksi</th>
+			@endif
         </tr>
         <tr>
             <th class="text-center">Temuan</th>
@@ -101,6 +103,7 @@
 							@endif
 							
 						</td>
+						@if (Auth::user()->level!=3)
 						<td class="text-center">
 							<div style="width:80px">
 								@if (Auth::user()->level==2)
@@ -108,11 +111,15 @@
 										<i class="fa fa-edit"></i>
 									</a>
 								@endif
+
+								
 								<a href="javascript:hapusdetail({{$us->id}})" class="btn btn-xs btn-danger btn-delete" style="height:24px !important;">
 									<i class="fa fa-trash"></i>
 								</a>
+								
 							</div>
 						</td>
+						@endif
 					</tr>
 				@endforeach
 			@endif

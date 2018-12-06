@@ -17,11 +17,79 @@ class LaporanTemuanController extends Controller
     public function index()
     {
         $dinas=MasterDinas::all();
-        return view('backend.pages.laporan.rekap-temuan')->with('dinas',$dinas);
+        $daftar=DaftarTemuan::all();
+        $d=$selesai=$baru=$tujuh=$enampuluh=array();
+        foreach($daftar as $k=>$v)
+        {
+            $selisih=selisihhari($v->created_at,date('Y-m-d'));
+            $d[$v->dinas_id][]=$v;
+            if($v->flag==1)
+                $selesai[$v->dinas_id][]=$v;
+            else
+            {
+                if($selisih<=7)
+                    $baru[$v->dinas_id][]=$v;
+                
+                if($selisih>43 && $selisih<=60)
+                    $tujuh[$v->dinas_id][]=$v;
+                
+                if($selisih>60)
+                    $enampuluh[$v->dinas_id][]=$v;
+            }
+        }
+        return view('backend.pages.laporan.rekap-temuan')->with('dinas',$dinas)
+            ->with(['d'=>$d,
+                    'selesai'=>$selesai,
+                    'baru'=>$baru,
+                    'tujuh'=>$tujuh,
+                    'enampuluh'=>$enampuluh]);
     }
     public function rekapdetail($opd)
     {
         $dinas=MasterDinas::where('nama_slug',$opd)->first();
-        return view('backend.pages.laporan.rekap-detail')->with('dinas',$dinas);
+        $daftar=DaftarTemuan::where('dinas_id',$dinas->id)->with(['pengawasan','aparat','dinas','daftar'])->get();
+        $d=$selesai=$baru=$tujuh=$enampuluh=array();
+        $hasil='';
+        foreach($daftar as $k=>$v)
+        {
+            $selisih=selisihhari($v->created_at,date('Y-m-d'));
+            $d[$v->dinas_id][]=$v;
+            if($v->flag==1)
+                $hasil='<button class="btn btn-xs btn-success" style="height:24px !important;">Selesai</button>';
+            else
+            {
+                //$hasil.=$selisih;
+                if($selisih<=7)
+                    $hasil='<button class="btn btn-xs btn-default" style="height:24px !important;background:#ccc;">Baru</button>';
+                else if( $selisih>43 && $selisih <= 60)
+                    $hasil='<button class="btn btn-xs btn-warning" style="height:24px !important;">7 Hari Lagi Batas Akhir Tindak Lanjut</button>';
+                else if( $selisih > 60)
+                    $hasil='<button class="btn btn-xs btn-danger" style="height:24px !important;">Belum Selesai : &gt; 60 Hari</button>';
+                else
+                {
+                    $maxdate=adddate($v->created_at,60);
+                    $hasil='<button class="btn btn-xs btn-info" style="height:24px !important;">
+                    Sedang Proses
+                    </button><br>';
+                    $hasil.='Maks Tgl :<br> <i class="fa fa-calendar"></i> '.date('d-m-Y',strtotime($maxdate));
+                }
+            }
+        }
+        $detail=DetailTemuan::with(['daftar','temuan','sebab','rekomendasi'])->get();
+        $det=array();
+        foreach($detail as $k=>$v)
+        {
+            $det[$v->daftar_id][]=$v;
+        }
+        return view('backend.pages.laporan.rekap-detail')
+                ->with('dinas',$dinas)
+                ->with('det',$det)
+                ->with('daftar',$daftar)
+                ->with('hasil',$hasil)
+                ->with(['d'=>$d,
+                    'selesai'=>$selesai,
+                    'baru'=>$baru,
+                    'tujuh'=>$tujuh,
+                    'enampuluh'=>$enampuluh]);
     }
 }

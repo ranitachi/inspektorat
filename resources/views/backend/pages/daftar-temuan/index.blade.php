@@ -152,10 +152,15 @@
         var dinas_id='{{$dinas_id}}';
         var tahun='{{$tahun}}';
         var pengawasan_id='{{$pengawasan_id}}';
+        
+
         if(dinas_id!='' && tahun!='' && pengawasan_id!='')
         {
             loaddata(dinas_id,tahun,pengawasan_id);
         }
+        else
+            loaddata(-1,-1,-1);
+
 
         function getdata()
         {
