@@ -26,7 +26,7 @@ Route::resource('data-penyebab','MasterSebabController')->middleware('auth');
 Route::resource('data-rekomendasi','MasterRekomendasiController')->middleware('auth');
 Route::resource('bidang-pengawasan','MasterBidangPengawasanController')->middleware('auth');
 Route::resource('users','UsersController')->middleware('auth');
-Route::resource('tindak-lanjut', 'TindakLanjutTemuanController');
+Route::get('tindak-lanjut/{id}', 'TindakLanjutTemuanController@index')->name('tindak-lanjut.index');
 
 Route::get('rekap-temuan','LaporanTemuanController@index')->middleware('auth');
 Route::get('rekap-temuan-detail/{opd}','LaporanTemuanController@rekapdetail')->middleware('auth');

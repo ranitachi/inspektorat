@@ -11,7 +11,7 @@
 				<div class="widget stats-widget">
 					<div class="widget-body clearfix">
 						<div class="pull-left">
-							<h3 class="widget-title text-primary"><span class="counter" data-plugin="counterUp">4</span></h3>
+							<h3 class="widget-title text-primary"><span class="counter" data-plugin="counterUp">2</span></h3>
 							<small class="text-color">Total Temuan</small>
 						</div>
 						<span class="pull-right big-icon watermark"><i class="fa fa-paperclip"></i></span>
@@ -27,7 +27,7 @@
 				<div class="widget stats-widget">
 					<div class="widget-body clearfix">
 						<div class="pull-left">
-							<h3 class="widget-title text-danger"><span class="counter" data-plugin="counterUp">2</span></h3>
+							<h3 class="widget-title text-danger"><span class="counter" data-plugin="counterUp">0</span></h3>
 							<small class="text-color">Jumlah Temuan</small>
 						</div>
 						<span class="pull-right big-icon watermark"><i class="fa fa-ban"></i></span>
@@ -60,12 +60,12 @@
 					<div class="widget-body clearfix">
 						<div class="pull-left">
 							<h3 class="widget-title text-warning"><span class="counter" data-plugin="counterUp">1</span></h3>
-							<small class="text-color">Jumlah temuan</small>
+							<small class="text-color">Jumlah Temuan</small>
 						</div>
 						<span class="pull-right big-icon watermark"><i class="fa fa-file-text-o"></i></span>
 					</div>
 					<footer class="widget-footer bg-warning">
-						<small>Mendekati Batas Tidak Lanjut</small>
+						<small>Batas Tidak Lanjut</small>
 						<span class="small-chart pull-right" data-plugin="sparkline" data-options="[5,4,3,5,2],{ type: 'bar', barColor: '#ffffff', barWidth: 5, barSpacing: 2 }"><canvas width="33" height="16" style="display: inline-block; width: 33px; height: 16px; vertical-align: top;"></canvas></span>
 					</footer>
 				</div><!-- .widget -->

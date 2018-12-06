@@ -12,27 +12,60 @@
                     <div class="text-right">
                         <small style="margin-right:30px;">Bidang Pengawasan</small>
                         <div style="margin-top:5px;margin-right:30px;">
-                            <h4 class="m-0 m-t-xs">Audit Kinerja</h4>
+                            <h4 class="m-0 m-t-xs">{{ $temuan->pengawasan->bidang }}</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4 promo-tab">
                     <div class="text-center">
-                        <small>Nomor Temuan</small>
-                        <h4 class="m-0 m-t-xs">700.138/08-Insp/I/2017</h4>
+                        <small>Nomor LHP</small>
+                        <h4 class="m-0 m-t-xs">{{ $temuan->no_pengawasan }}</h4>
                     </div>
                 </div>
                 <div class="col-sm-4 promo-tab">
                     <div class="text-left" style="margin-left:30px;">
-                        <small>Nomor Kontrak Pekerjaan</small>
-                        <h4 class="m-0 m-t-xs">29 Mei 2017</h4>
+                        <small>Tanggal LHP</small>
+                        <h4 class="m-0 m-t-xs">{{ $temuan->tgl_pengawasan }}</h4>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-md-12" style="margin-top:20px;">
+    <div class="col-md-12">
+        {{-- <h4 class="m-h-lg">Detail Temuan</h4> --}}
+        <div class="panel-group accordion" id="accordion" role="tablist" aria-multiselectable="true" style="margin-top:20px;">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading-2">
+                    <a class="accordion-toggle collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
+                        <h4 class="panel-title">Uraian Temuan</h4>
+                        <i class="fa acc-switch"></i>
+                    </a>
+                </div>
+                <div id="collapse-2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-2" aria-expanded="false" style="height: 0px;">
+                    <div class="panel-body">
+                        {!! $temuan->uraian_temuan !!}
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading-3">
+                    <a class="accordion-toggle collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
+                        <h4 class="panel-title">Uraian Rekomendasi</h4>
+                        <i class="fa acc-switch"></i>
+                    </a>
+                </div>
+                <div id="collapse-3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-3" aria-expanded="false">
+                    <div class="panel-body">
+                        {!! $temuan->uraian_rekomendasi !!}
+                    </div>
+                </div>
+            </div>
+        </div><!-- panel-group -->
+    </div>
+
+    <div class="col-md-12">
 		<div class="widget">
 			<header class="widget-header">
 				<span class="widget-title">Formulir Tindak Lanjut</span>

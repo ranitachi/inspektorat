@@ -44,18 +44,6 @@
 						<td>{!! $us->uraian_rekomendasi !!}</td>
 						<td class="text-center">{{$us->rekomendasi->code}}</td>
 						<td class="text-left">
-							@if (Auth::user()->level==3)
-                                 <span data-toggle="tooltip" data-title="Tanggapan">
-                                     <a href="{{ route('tindak-lanjut.index') }}" class="btn btn-xs btn-success" style="height:24px !important;">
-                                         <i class="fa fa-volume-up"></i>
-                                     </a>
-                                 </span>&nbsp;
-                                 {{-- <span data-toggle="tooltip" data-title="Detail">
-                                     <a class="btn btn-xs btn-primary" style="height:24px !important;">
-                                         <i class="fa fa-list"></i>
-                                     </a>
-                                 </span> --}}
-                             @endif
 							@if (Auth::user()->level==1)
 								@if ($us->flag==0)
 									<span class="label label-danger">Belum Verifikasi</span>
@@ -79,7 +67,7 @@
 									<span class="label label-success"><i class="fa fa-eye"></i> Lihat Tanggapan</span>
 								@endif
 							@elseif(Auth::user()->level==3)
-								<a href="{{ route('tindak-lanjut.index') }}">Belum ada tindak lanjut</a>
+								<a href="{{ route('tindak-lanjut.index', $us->id) }}">Belum ada tindak lanjut</a>
 							@endif
 						</td>
 						<td class="text-center">
