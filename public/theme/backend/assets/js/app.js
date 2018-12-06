@@ -12,7 +12,7 @@
 			themes: ['light', 'dark']
 		},
 		navbar: {
-			theme: 'primary',
+			theme: 'purple',
 			themes: ['primary', 'success', 'warning', 'danger', 'pink', 'purple', 'inverse', 'dark']
 		}
 	};

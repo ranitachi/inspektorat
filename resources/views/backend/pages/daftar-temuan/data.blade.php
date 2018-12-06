@@ -9,11 +9,11 @@
 			<th class="text-center" rowspan="2" style="width:15px;">#</th>
 			<th class="text-center" rowspan="2">Bidang Pengawasan<br>No & Tgl LHP</th>
 			<th class="text-center" rowspan="2">Temuan / Penyebab<br>(Uraian Ringkas)</th>
-			<th class="text-center" colspan="2">Kode</th>
+			<th class="text-center" rowspan="2">Kode Temuan</th>
 			<th class="text-center" rowspan="2">Rekomendasi<br>(Uraian Ringkas)</th>
 			<th class="text-center" rowspan="2">Kode Rekomendasi</th>
 			@if (Auth::user()->level==3)
-				<th class="text-center" rowspan="2">Tanggapan</th>
+				<th class="text-center" rowspan="2">Tindak Lanjut</th>
 			@else
 				<th class="text-center" rowspan="2">Status</th>
 			@endif
@@ -21,10 +21,6 @@
 			@if (Auth::user()->level!=3)
 			<th class="text-center" rowspan="2">Aksi</th>
 			@endif
-        </tr>
-        <tr>
-            <th class="text-center">Temuan</th>
-            <th class="text-center">Sebab</th>
         </tr>
 	</thead>
 	<tbody>
@@ -45,27 +41,11 @@
 						</td>
 						<td>
 							{!! $us->uraian_temuan !!}
-							<br><br>
-							<b>Penyebab : </b><br>
-							{!! $us->penyebab !!}
 						</td>
 						<td class="text-center">{{$us->temuan->code}}</td>
-						<td class="text-center">{{$us->sebab->code}}</td>
 						<td>{!! $us->uraian_rekomendasi !!}</td>
 						<td class="text-center">{{$us->rekomendasi->code}}</td>
 						<td class="text-left">
-							@if (Auth::user()->level==3)
-                                 <span data-toggle="tooltip" data-title="Tanggapan">
-                                     <a href="{{ route('tindak-lanjut.index') }}" class="btn btn-xs btn-success" style="height:24px !important;">
-                                         <i class="fa fa-volume-up"></i>
-                                     </a>
-                                 </span>&nbsp;
-                                 {{-- <span data-toggle="tooltip" data-title="Detail">
-                                     <a class="btn btn-xs btn-primary" style="height:24px !important;">
-                                         <i class="fa fa-list"></i>
-                                     </a>
-                                 </span> --}}
-                             @endif
 							@if (Auth::user()->level==1)
 								@if ($us->flag==0)
 									<span class="label label-danger">Belum Verifikasi</span>
@@ -74,9 +54,9 @@
 									<a href="javascript:verifikasi({{$us->id}})" class="btn btn-xs btn-info"><i class="fa fa-check"></i> Verifikasi</a>
 								@elseif ($us->flag==2)
 									<span class="label label-success"><i class="fa fa-check"></i> Verifikasi</span>
-									<span class="label label-info">Belum Ditanggapi OPD</span>
+									<span class="label label-info">Belum Tindak Lanjut</span>
 								@else
-									<span class="label label-success"><i class="fa fa-eye"></i> Lihat Tanggapan</span>
+									<a href="{{ route('tindak-lanjut.show', $us->tindak_lanjut_temuan->id) }}" style="color:green;">Telah Ditindaklanjuti</a>
 								@endif
 							@elseif(Auth::user()->level==2)
 						
@@ -84,9 +64,15 @@
 									<span class="label label-danger">Menunggu Verifikasi</span>
 								@elseif ($us->flag==2)
 									<span class="label label-success"><i class="fa fa-check"></i> Verifikasi</span>
-									<span class="label label-info">Belum Ditanggapi OPD</span>
+									<span class="label label-info">Belum Tindak Lanjut</span>
 								@else
 									<span class="label label-success"><i class="fa fa-eye"></i> Lihat Tanggapan</span>
+								@endif
+							@elseif(Auth::user()->level==3)
+								@if ($us->flag==2)
+									<a href="{{ route('tindak-lanjut.index', $us->id) }}" style="color:red;">Belum ada tindak lanjut</a>
+								@elseif($us->flag==3)
+									<a href="{{ route('tindak-lanjut.edit', $us->id) }}" style="color:green;">Telah Ditindaklanjuti</a>
 								@endif
 							@endif
 						</td>

@@ -9,10 +9,14 @@ class TindakLanjutTemuan extends Model
 {
     use SoftDeletes;
     protected $table = 'tindak_lanjut_temuan';
-    protected $fillable = ['detail_id','status','tindak_lanjut','paraf_inspektorat','keterangan','created_at','updated_at','deleted_at'];
+    protected $fillable = ['detail_id','tindak_lanjut','keterangan','created_at','updated_at','deleted_at'];
 
     function detail()
     {
         return $this->belongsTo('App\Models\DetailTemuan','detail_id');
+    }
+
+    public function dokumen_tindak_lanjut() {
+        return $this->hasMany('App\Models\DokumenTindakLanjut', 'id_tindak_lanjut_temuan');
     }
 }

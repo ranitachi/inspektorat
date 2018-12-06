@@ -22,8 +22,8 @@
                                 <th class="text-center" colspan="4">Status</th>
                             </tr>
                             <tr>
-                                <th class="text-center">Selesai</th>
                                 <th class="text-center">Baru Masuk</th>
+                                <th class="text-center">Selesai</th>
                                 <th class="text-center">7 Hari Batas Akhir<br> Tindak Lanjut</th>
                                 <th class="text-center">&gt; 60 Hari</th>
                             </tr>

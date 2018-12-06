@@ -22,16 +22,12 @@
                                 <th class="text-center" rowspan="2" style="width:15px;">#</th>
                                 <th class="text-center" rowspan="2">Bidang Pengawasan<br>No & Tgl LHP</th>
                                 <th class="text-center" rowspan="2">Temuan / Penyebab<br>(Uraian Ringkas)</th>
-                                <th class="text-center" colspan="2">Kode</th>
+                                <th class="text-center" rowspan="2">Kode Temuan</th>
                                 <th class="text-center" rowspan="2">Rekomendasi<br>(Uraian Ringkas)</th>
                                 <th class="text-center" rowspan="2">Kode Rekomendasi</th>
                                 
                                 <th class="text-center" rowspan="2">Status</th>
                                 
-                            </tr>
-                            <tr>
-                                <th class="text-center">Temuan</th>
-                                <th class="text-center">Sebab</th>
                             </tr>
                         </thead>
 
@@ -85,7 +81,6 @@
                                         Pejabat yang bersangkutan belum menaati peraturan yang berlaku.
                                     </td>
                                     <td>03</td>
-                                    <td>104</td>
                                     <td>
                                         Kepala Dinas secara tertulis memerintahkan agar segera membuat Program Kerja Tahunan untuk Tahun Anggaran 2017.
                                     </td>
@@ -113,7 +108,6 @@
                                         Pejabat yang bersangkutan belum menaati peraturan yang berlaku.
                                     </td>
                                     <td>03</td>
-                                    <td>104</td>
                                     <td>
                                         Kepala Dinas secara tertulis memerintahkan agar segera membuat Program Kerja Tahunan untuk Tahun Anggaran 2017.
                                     </td>

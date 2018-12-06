@@ -86,7 +86,7 @@
 						<span class="pull-right big-icon watermark"><i class="fa fa-file-text-o"></i></span>
 					</div>
 					<footer class="widget-footer bg-warning">
-						<small>Mendekati Batas Tidak Lanjut</small>
+						<small>Batas Tidak Lanjut</small>
 						<span class="small-chart pull-right" data-plugin="sparkline" data-options="[5,4,3,5,2],{ type: 'bar', barColor: '#ffffff', barWidth: 5, barSpacing: 2 }"><canvas width="33" height="16" style="display: inline-block; width: 33px; height: 16px; vertical-align: top;"></canvas></span>
 					</footer>
 				</div><!-- .widget -->

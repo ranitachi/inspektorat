@@ -106,6 +106,33 @@
                             </div>
                             <hr class="widget-separator" style="margin:10px 0;">
                             <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group" style="margin-bottom:5px !important;">
+                                            {!!$i==0 ? '<label for="exampleInputEmail1" class="col-md-4 control-label">Kode Rekomendasi</label>' : ''!!}
+                                            <div class="col-sm-8">
+                                                <select name="rekomendasi[{{$i}}]" id="rekomendasi" class="form-control text-left" style="text-align:left !important" data-plugin="select2" >  
+                                                        <option value="">-- Kode Rekomendasi --</option>
+                                                        @foreach ($rekomendasi as $item)
+                                                            <option value="{{$item->id}}">{{$item->code}} - {{$item->rekomendasi}}</option>
+                                                        @endforeach
+                                                </select>
+                                            </div> 
+                                        </div> 
+                                    </div> 
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1" class="col-md-2 control-label">Uraian Rekomendasi</label>
+                                            <div class="col-md-10">
+                                                <textarea class="form-control" name="uraian_rekomendasi[{{$i}}]" style="margin-top:0px !important" placeholder="Uraian Singkat" id="uraian_rekomendasi" ></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+
+                            {{-- <hr class="widget-separator" style="margin:10px 0;">
+                            <div class="col-md-12">
                                  <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group" style="margin-bottom:5px !important;">
@@ -131,33 +158,8 @@
                                         </div>
                                     </div>
                                 </div> 
-                            </div>
-                            <hr class="widget-separator" style="margin:10px 0;">
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group" style="margin-bottom:5px !important;">
-                                            {!!$i==0 ? '<label for="exampleInputEmail1" class="col-md-4 control-label">Kode Rekomendasi</label>' : ''!!}
-                                            <div class="col-sm-8">
-                                                <select name="rekomendasi[{{$i}}]" id="rekomendasi" class="form-control text-left" style="text-align:left !important" data-plugin="select2" >  
-                                                        <option value="">-- Kode Rekomendasi --</option>
-                                                        @foreach ($rekomendasi as $item)
-                                                            <option value="{{$item->id}}">{{$item->code}} - {{$item->rekomendasi}}</option>
-                                                        @endforeach
-                                                </select>
-                                            </div> 
-                                        </div> 
-                                    </div> 
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1" class="col-md-2 control-label">Uraian Rekomendasi</label>
-                                            <div class="col-md-10">
-                                                <textarea class="form-control" name="uraian_rekomendasi[{{$i}}]" style="margin-top:0px !important" placeholder="Uraian Singkat" id="uraian_rekomendasi" ></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> 
-                            </div>
+                            </div> --}}
+                            
                         </div>
                         
                     @endfor
@@ -177,7 +179,7 @@
 <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
 <script>
     CKEDITOR.replace( 'uraian_temuan' );
-    CKEDITOR.replace( 'uraian_sebab' );
+    // CKEDITOR.replace( 'uraian_sebab' );
     CKEDITOR.replace( 'uraian_rekomendasi' );
 </script>
 <script>
