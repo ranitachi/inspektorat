@@ -28,7 +28,7 @@
         <li class="has-submenu">
           <a href="{{url('dashboard')}}" class="submenu-toggle">
             <i class="menu-icon zmdi zmdi-view-dashboard zmdi-hc-lg"></i>
-            <span class="menu-text">Dashboards</span>
+            <span class="menu-text">Dashboard</span>
           </a>
         </li>
         <li class="has-submenu {{$url=='data-opd' || $url=='kepala-opd' ? 'active open' : ''}}">

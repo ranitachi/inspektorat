@@ -21,7 +21,7 @@
                             <tr>
                                 <th class="text-center" rowspan="2" style="width:15px;">#</th>
                                 <th class="text-center" rowspan="2">Bidang Pengawasan<br>No & Tgl LHP</th>
-                                <th class="text-center" rowspan="2">Temuan / Penyebab<br>(Uraian Ringkas)</th>
+                                <th class="text-center" rowspan="2">Temuan<br>(Uraian Ringkas)</th>
                                 <th class="text-center" rowspan="2">Kode Temuan</th>
                                 <th class="text-center" rowspan="2">Rekomendasi<br>(Uraian Ringkas)</th>
                                 <th class="text-center" rowspan="2">Kode Rekomendasi</th>
@@ -51,12 +51,9 @@
                                         </td>
                                         <td>
                                             {!! $us->uraian_temuan !!}
-                                            <br><br>
-                                            <b>Penyebab : </b><br>
-                                            {!! $us->penyebab !!}
+                                            
                                         </td>
                                         <td class="text-center">{{$us->temuan->code}}</td>
-                                        <td class="text-center">{{$us->sebab->code}}</td>
                                         <td>{!! $us->uraian_rekomendasi !!}</td>
                                         <td class="text-center">{{$us->rekomendasi->code}}</td>
                                         <td class="text-center">{!!$hasil!!}</td>
@@ -64,59 +61,6 @@
                                 @endforeach
                             @endif
                     @endforeach
-                                {{-- <tr>
-                                    <td>1</td>
-                                    <td>
-                                        Audit Kinerja <br>
-                                        700.138/08-Insp/I/2017 <br>
-                                        29 Mei 2017
-                                    </td>
-                                    <td>
-                                        Terdapat 2 orang Pejabat belum membuat Program Kerja, yaitu sebagai berikut:
-                                        <br>
-                                        - Kepala Sub Bidang Keuangan <br>
-                                        - Kepala Sub Bidang Administratif <br>
-                                        <br>
-                                        Penyebab: <br>
-                                        Pejabat yang bersangkutan belum menaati peraturan yang berlaku.
-                                    </td>
-                                    <td>03</td>
-                                    <td>
-                                        Kepala Dinas secara tertulis memerintahkan agar segera membuat Program Kerja Tahunan untuk Tahun Anggaran 2017.
-                                    </td>
-                                    <td>050</td>
-                                    
-                                   
-                                    <td><button class="btn btn-xs btn-success" style="height:24px !important;">Selesai</button></td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>
-                                        Laporan hasil  <br>Pemeriksaan Reguler 
-                                        700.138/09-Insp/I/2017 <br>
-                                        31 Mei 2017
-                                    </td>
-                                    <td>
-                                        Terdapat 3 UPT belum membuat Program Kerja, yaitu sebagai berikut:
-                                        <br>
-                                        - UPT Tempat Pembuangan Air <br>
-                                        - UPT Kebersihan dan Pertamanan <br>
-                                        - UPT UPT Laboratorium <br>
-                                        <br>
-                                        Penyebab: <br>
-                                        Pejabat yang bersangkutan belum menaati peraturan yang berlaku.
-                                    </td>
-                                    <td>03</td>
-                                    <td>
-                                        Kepala Dinas secara tertulis memerintahkan agar segera membuat Program Kerja Tahunan untuk Tahun Anggaran 2017.
-                                    </td>
-                                    <td>050</td>
-                                    
-                                   
-                                    <td><button class="btn btn-xs btn-warning" style="height:24px !important;">7 Hari Lagi Batas Akhir Tindak Lanjut</button></td>
-                                    
-                                </tr> --}}
                         </tbody>
                     </table>
 				</div>

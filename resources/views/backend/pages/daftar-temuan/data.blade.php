@@ -71,7 +71,7 @@
 							@elseif(Auth::user()->level==3)
 								@if ($us->flag==2)
 									<a href="{{ route('tindak-lanjut.index', $us->id) }}" style="color:red;">Belum ada tindak lanjut</a>
-								@elseif($us->flag==3)
+								@else
 									<a href="{{ route('tindak-lanjut.edit', $us->id) }}" style="color:green;">Telah Ditindaklanjuti</a>
 								@endif
 							@endif
