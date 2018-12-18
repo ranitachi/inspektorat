@@ -160,6 +160,7 @@ class DaftarTemuanController extends Controller
             $detail->penyebab=$request->uraian_sebab[$k];
             $detail->rekomendasi_id=$request->rekomendasi[$k];
             $detail->uraian_rekomendasi=$request->uraian_rekomendasi[$k];
+            $detail->kerugian=str_replace(array(',','.'),'',$request->kerugian[$k]);
             $detail->save();
         }
 
@@ -175,13 +176,15 @@ class DaftarTemuanController extends Controller
     {
         // dd($request->all());
         $detail=DetailTemuan::find($iddetail);
-        $detail->flag=0;
+        // $detail->flag=0;
         $detail->temuan_id=$request->temuan;
         $detail->uraian_temuan=$request->uraian_temuan;
         $detail->sebab_id=$request->sebab;
         $detail->penyebab=$request->uraian_sebab;
         $detail->rekomendasi_id=$request->rekomendasi;
         $detail->uraian_rekomendasi=$request->uraian_rekomendasi;
+        $detail->flag=$detail->flag;
+        $detail->kerugian=str_replace(array(',','.'),'',$request->kerugian);
         $detail->save();
         
 

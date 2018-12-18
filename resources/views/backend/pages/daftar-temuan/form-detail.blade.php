@@ -128,6 +128,14 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-12" >
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1" class="col-md-2 control-label">Kerugian</label>
+                                            <div class="col-md-3">
+                                                <input type="text" name="kerugian[{{$i}}]" class="form-control" id="kerugian" value="" >
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div> 
                             </div>
                             <hr class="widget-separator" style="margin:10px 0;">

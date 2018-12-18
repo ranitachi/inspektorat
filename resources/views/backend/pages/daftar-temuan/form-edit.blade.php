@@ -137,7 +137,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> 
+                                    <div class="col-md-12" >
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1" class="col-md-2 control-label">Kerugian</label>
+                                            <div class="col-md-3">
+                                                <input type="text" name="kerugian" class="form-control" id="kerugian" value="{{$detail->kerugian}}" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                             </div>
                             <hr class="widget-separator" style="margin:10px 0;">
                             <div class="col-md-12">
