@@ -108,8 +108,11 @@
                                 
                             </div>
                             <hr class="widget-separator" style="margin:10px 0;">
+                            <input type="hidden" name="sebab">
+                            <input type="hidden" name="uraian_sebab">
                             <div class="col-md-12">
-                                 <div class="row">
+                            
+                                 {{-- <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group" style="margin-bottom:5px !important;">
                                             {!!$i==0 ? '<label for="exampleInputEmail1" class="col-md-4 control-label">Kode Penyebab</label>' : ''!!}
@@ -127,16 +130,16 @@
                                         </div>
                                         </div> 
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="row">
-                                    <div class="col-md-12" >
+                                    {{-- <div class="col-md-12" >
                                         <div class="form-group">
                                             <label for="exampleInputEmail1" class="col-md-2 control-label">Uraian Penyebab</label>
                                             <div class="col-md-10">
-                                                <textarea class="form-control" name="uraian_sebab" style="margin-top:0px !important" placeholder="Uraian Singkat" id="uraian_sebab" >{{$detail->penyebab}}</textarea>
+                                                
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-md-12" >
                                         <div class="form-group">
                                             <label for="exampleInputEmail1" class="col-md-2 control-label">Kerugian</label>
@@ -197,7 +200,7 @@
 <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
 <script>
     CKEDITOR.replace( 'uraian_temuan' );
-    CKEDITOR.replace( 'uraian_sebab' );
+    // CKEDITOR.replace( 'uraian_sebab' );
     CKEDITOR.replace( 'uraian_rekomendasi' );
 </script>
 <script>
