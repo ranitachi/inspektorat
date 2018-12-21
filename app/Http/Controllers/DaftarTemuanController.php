@@ -34,13 +34,14 @@ class DaftarTemuanController extends Controller
     public function data($dinas_id=null,$tahun=null,$bidang_id=null)
     {
         if($bidang_id!=null)
-        {
-            if($dinas_id==-1)
+        {       
+            if($dinas_id==-1) {
                 $daftar=DaftarTemuan::with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
-            else
+            } else
             {
-                if($tahun==-1 && $bidang_id==-1)
+                if($tahun==-1 && $bidang_id==-1) {
                     $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+                }
                 else
                     $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun,'pengawasan_id'=>$bidang_id])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
             }
@@ -121,7 +122,7 @@ class DaftarTemuanController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
+        // dd($request);
         list($tgl,$bln,$thn)=explode('/',$request->tgl_pengawasan);
 
         $aparat=MasterDinas::where('nama_dinas','like',"%Inspektorat%")->first();
@@ -154,6 +155,7 @@ class DaftarTemuanController extends Controller
             $detail=new DetailTemuan;
             $detail->flag=0;
             $detail->daftar_id=$daftar_id;
+            $detail->pengawasan_id=$request->pengawasan_id;
             $detail->temuan_id=$v;
             $detail->uraian_temuan=$request->uraian_temuan[$k];
             $detail->sebab_id=$request->sebab[$k];

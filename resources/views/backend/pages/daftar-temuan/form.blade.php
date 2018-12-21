@@ -101,14 +101,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12" >
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1" class="col-md-2 control-label">Kerugian</label>
-                                            <div class="col-md-3">
-                                                <input type="text" name="kerugian[{{$i}}]" class="form-control" id="kerugian" value="" >
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 
                             </div>
@@ -137,6 +129,14 @@
                                         </div>
                                     </div>
                                 </div> 
+                            </div>
+                            <div class="col-md-12" >
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" class="col-md-2 control-label">Nilai Kerugian (Rp)</label>
+                                    <div class="col-md-3">
+                                        <input type="text" name="kerugian[{{$i}}]" class="form-control" id="kerugian" value="" >
+                                    </div>
+                                </div>
                             </div>
 
                             {{-- <hr class="widget-separator" style="margin:10px 0;">
@@ -172,8 +172,8 @@
                         
                     @endfor
                     <div class="row">
-                        <div class="col-sm-9 col-sm-offset-3">
-                            <button type="submit" class="btn btn-success pull-right">
+                        <div class="col-sm-9 col-sm-offset-2" style="margin-top:20px;">
+                            <button type="submit" class="btn btn-success">
                                 <i class="fa fa-save"></i> Simpan Daftar
                             </button>
                         </div>

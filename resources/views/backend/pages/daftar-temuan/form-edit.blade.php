@@ -140,14 +140,6 @@
                                             </div>
                                         </div>
                                     </div> --}}
-                                    <div class="col-md-12" >
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1" class="col-md-2 control-label">Kerugian</label>
-                                            <div class="col-md-3">
-                                                <input type="text" name="kerugian" class="form-control" id="kerugian" value="{{$detail->kerugian}}" >
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 
                             </div>
@@ -162,7 +154,7 @@
                                                         <option value="">-- Kode Rekomendasi --</option>
                                                         @foreach ($rekomendasi as $item)
                                                             @if ($item->id==$detail->rekomendasi_id)
-                                                                <option value="{{$item->id}}" selected="selected">{{$item->code}} - {{$item->temuan}}</option>
+                                                                <option value="{{$item->id}}" selected="selected">{{$item->code}} - {{$item->rekomendasi}}</option>
                                                             @else
                                                                 <option value="{{$item->id}}">{{$item->code}} - {{$item->rekomendasi}}</option>
                                                             @endif
@@ -176,6 +168,14 @@
                                             <label for="exampleInputEmail1" class="col-md-2 control-label">Uraian Rekomendasi</label>
                                             <div class="col-md-10">
                                                 <textarea class="form-control" name="uraian_rekomendasi" style="margin-top:0px !important" placeholder="Uraian Singkat" id="uraian_rekomendasi" >{{$detail->uraian_rekomendasi}}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" >
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1" class="col-md-2 control-label">Kerugian</label>
+                                            <div class="col-md-3">
+                                                <input type="text" name="kerugian" class="form-control" id="kerugian" value="{{$detail->kerugian}}" >
                                             </div>
                                         </div>
                                     </div>

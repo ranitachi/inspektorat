@@ -16,7 +16,7 @@ class TindakLanjutTemuanController extends Controller
 {
     public function index($id)
     {
-        $temuan = DetailTemuan::with('pengawasan')->findOrFail($id);
+        $temuan = DetailTemuan::with(['pengawasan', 'daftar'])->findOrFail($id);
 
         return view('backend.pages.tanggapan.index')->with('temuan', $temuan);
     }

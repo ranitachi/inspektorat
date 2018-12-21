@@ -19,13 +19,13 @@
                 <div class="col-sm-4 promo-tab">
                     <div class="text-center">
                         <small>Nomor LHP</small>
-                        <h4 class="m-0 m-t-xs">{{ $temuan->no_pengawasan }}</h4>
+                        <h4 class="m-0 m-t-xs">{{ $temuan->daftar->no_pengawasan }}</h4>
                     </div>
                 </div>
                 <div class="col-sm-4 promo-tab">
                     <div class="text-left" style="margin-left:30px;">
                         <small>Tanggal LHP</small>
-                        <h4 class="m-0 m-t-xs">{{ $temuan->tgl_pengawasan }}</h4>
+                        <h4 class="m-0 m-t-xs">{{ $temuan->daftar->tgl_pengawasan }}</h4>
                     </div>
                 </div>
             </div>
