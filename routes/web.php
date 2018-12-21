@@ -38,6 +38,9 @@ Route::get('tindak-lanjut/{id}/selesai', 'TindakLanjutTemuanController@selesai')
 Route::get('rekap-temuan','LaporanTemuanController@index')->middleware('auth');
 Route::get('rekap-temuan-detail/{opd}','LaporanTemuanController@rekapdetail')->middleware('auth');
 
+Route::get('rekomendasi-temuan', 'LaporanTemuanController@rekomendasi_temuan')->name('rekomendasi-temuan')->middleware('auth');
+Route::get('print-rekomendasi-temuan', 'LaporanTemuanController@print_rekomendasi_temuan')->name('print-rekomendasi-temuan')->middleware('auth');
+
 Route::resource('list-temuan','DaftarTemuanController')->middleware('auth');
 Route::get('list-temuan-data/{dinas_id?}/{tahun?}/{bidang_id?}','DaftarTemuanController@data')->middleware('auth');
 Route::get('detail-form/{daftar_id}/{dinas_id?}/{tahun?}/{bidang_id?}','DaftarTemuanController@form_detail')->middleware('auth');

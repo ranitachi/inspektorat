@@ -12,6 +12,8 @@ use App\Models\MasterSebab;
 use App\Models\MasterRekomendasi;
 
 use Auth;
+use DB;
+
 class LaporanTemuanController extends Controller
 {
     public function index()
@@ -44,6 +46,7 @@ class LaporanTemuanController extends Controller
                     'tujuh'=>$tujuh,
                     'enampuluh'=>$enampuluh]);
     }
+
     public function rekapdetail($opd)
     {
         $dinas=MasterDinas::where('nama_slug',$opd)->first();
@@ -91,5 +94,49 @@ class LaporanTemuanController extends Controller
                     'baru'=>$baru,
                     'tujuh'=>$tujuh,
                     'enampuluh'=>$enampuluh]);
+    }
+
+    public function rekomendasi_temuan()
+    {
+        $nilai = DetailTemuan::select('rekomendasi_id', DB::RAW('SUM(kerugian) as nilai_kerugian'))
+            ->groupby('rekomendasi_id')->get();
+
+        $kejadian = DetailTemuan::select('rekomendasi_id', DB::RAW('COUNT(*) as jumlah_kejadian'))
+            ->groupby('rekomendasi_id')->get();
+
+        $rekom = MasterRekomendasi::all();
+
+        $totalkejadian = 0;
+        foreach ($kejadian as $key => $value) {
+            $totalkejadian += $value->jumlah_kejadian;
+        }
+
+        return view('backend.pages.laporan.rekomendasi-temuan')
+            ->with('nilai', $nilai)
+            ->with('rekom', $rekom)
+            ->with('totalkejadian', $totalkejadian)
+            ->with('kejadian', $kejadian);
+    }
+
+    public function print_rekomendasi_temuan()
+    {
+        $nilai = DetailTemuan::select('rekomendasi_id', DB::RAW('SUM(kerugian) as nilai_kerugian'))
+            ->groupby('rekomendasi_id')->get();
+
+        $kejadian = DetailTemuan::select('rekomendasi_id', DB::RAW('COUNT(*) as jumlah_kejadian'))
+            ->groupby('rekomendasi_id')->get();
+
+        $rekom = MasterRekomendasi::all();
+
+        $totalkejadian = 0;
+        foreach ($kejadian as $key => $value) {
+            $totalkejadian += $value->jumlah_kejadian;
+        }
+
+        return view('backend.pages.laporan.print-rekomendasi-temuan')
+            ->with('nilai', $nilai)
+            ->with('rekom', $rekom)
+            ->with('totalkejadian', $totalkejadian)
+            ->with('kejadian', $kejadian);
     }
 }
