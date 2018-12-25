@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('title')
-    <title>Laporan Per Rekomendasi Temuan</title>
+    <title>Data Temuan</title>
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@
 		<div class="widget">
 			<header class="widget-header">
                 <div class="col-md-8">
-                    <span class="widget-title">Rekomendasi Temuan Tahun 2018</span>
+                    <span class="widget-title">Laporan Per Kelompok Temuan Tahun 2018</span>
                 </div>
                 <div class="col-md-2">
                     <select name="tahun" class="form-control pull-right">
@@ -17,7 +17,7 @@
                     </select>
                 </div>
                 <div class="col-md-2">
-                    <a href="{{ route('print-rekomendasi-temuan') }}" target="_blank" class="btn btn-primary">Cetak Laporan</a>
+                    <a href="{{ route('print-kelompok-temuan') }}" target="_blank" class="btn btn-primary">Cetak Laporan</a>
                 </div>
 			</header><!-- .widget-header -->
 			<hr class="widget-separator">
@@ -35,17 +35,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($rekom as $key => $item)
+                            @foreach ($temuan as $key => $item)
                                 <tr>
                                     <td>{{ $key = $key + 1 }}</td>
-                                    <td>{{ $item->rekomendasi }}</td>
+                                    <td>{{ $item->temuan }}</td>
                                     <td style="text-align:center;">{{ $item->code }}</td>
                                     <td style="text-align:center;">
                                         @php
                                             $countkejadian = 0;
                                         @endphp
                                         @foreach ($kejadian as $k)
-                                            @if ($k->rekomendasi_id==$item->id)
+                                            @if ($k->temuan_id==$item->id)
                                                 @php
                                                     $countkejadian = $k->jumlah_kejadian
                                                 @endphp
@@ -62,7 +62,7 @@
                                             $countkerugian = 0;
                                         @endphp
                                         @foreach ($nilai as $k)
-                                            @if ($k->rekomendasi_id==$item->id)
+                                            @if ($k->temuan_id==$item->id)
                                                 @php
                                                     $countkerugian = $k->nilai_kerugian
                                                 @endphp

@@ -139,4 +139,48 @@ class LaporanTemuanController extends Controller
             ->with('totalkejadian', $totalkejadian)
             ->with('kejadian', $kejadian);
     }
+
+    public function kelompok_temuan()
+    {
+        $nilai = DetailTemuan::select('temuan_id', DB::RAW('SUM(kerugian) as nilai_kerugian'))
+            ->groupby('temuan_id')->get();
+
+        $kejadian = DetailTemuan::select('temuan_id', DB::RAW('COUNT(*) as jumlah_kejadian'))
+            ->groupby('temuan_id')->get();
+
+        $temuan = MasterTemuan::all();
+
+        $totalkejadian = 0;
+        foreach ($kejadian as $key => $value) {
+            $totalkejadian += $value->jumlah_kejadian;
+        }
+
+        return view('backend.pages.laporan.kelompok-temuan')
+            ->with('nilai', $nilai)
+            ->with('temuan', $temuan)
+            ->with('totalkejadian', $totalkejadian)
+            ->with('kejadian', $kejadian);
+    }
+
+    public function print_kelompok_temuan()
+    {
+        $nilai = DetailTemuan::select('temuan_id', DB::RAW('SUM(kerugian) as nilai_kerugian'))
+            ->groupby('temuan_id')->get();
+
+        $kejadian = DetailTemuan::select('temuan_id', DB::RAW('COUNT(*) as jumlah_kejadian'))
+            ->groupby('temuan_id')->get();
+
+        $temuan = MasterTemuan::all();
+
+        $totalkejadian = 0;
+        foreach ($kejadian as $key => $value) {
+            $totalkejadian += $value->jumlah_kejadian;
+        }
+
+        return view('backend.pages.laporan.print-kelompok-temuan')
+            ->with('nilai', $nilai)
+            ->with('temuan', $temuan)
+            ->with('totalkejadian', $totalkejadian)
+            ->with('kejadian', $kejadian);
+    }
 }

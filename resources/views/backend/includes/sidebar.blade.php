@@ -71,9 +71,10 @@
             <span class="menu-text">Laporan</span>
             <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
           </a>
-          <ul class="submenu" style="{{$url=='rekap-temuan' || $url=='rekomendasi-temuan' ? 'display:block' : ''}}">
+          <ul class="submenu" style="{{$url=='rekap-temuan' || $url=='rekomendasi-temuan' || $url=='laporan-kelompok-temuan' ? 'display:block' : ''}}">
             <li class="{{$url=='rekap-temuan' ? 'active' : ''}}"><a href="{{url('rekap-temuan')}}"><span class="menu-text">Rekap Temuan</span></a></li>
-            <li class="{{$url=='rekomendasi-temuan' ? 'active' : ''}}"><a href="{{url('rekomendasi-temuan')}}"><span class="menu-text">Rekomendasi Temuan</span></a></li>
+            <li class="{{$url=='rekomendasi-temuan' ? 'active' : ''}}"><a href="{{url('rekomendasi-temuan')}}"><span class="menu-text">Per Rekomendasi Temuan</span></a></li>
+            <li class="{{$url=='laporan-kelompok-temuan' ? 'active' : ''}}"><a href="{{url('laporan-kelompok-temuan')}}"><span class="menu-text">Per Kelompok Temuan</span></a></li>
           </ul>
         </li>
         <li class="has-submenu {{$url=='users' ? 'active open' : ''}}">
