@@ -15,9 +15,7 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-Route::get('/dashboard', function(){
-    return view('backend.pages.dashboard.index');
-})->middleware('auth');
+Route::get('/dashboard', 'DashboardController@index')->middleware('auth');
 
 Route::resource('data-opd','MasterDinasController')->middleware('auth');
 Route::resource('kepala-opd','MasterKepalaDinasController')->middleware('auth');

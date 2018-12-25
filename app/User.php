@@ -31,6 +31,7 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\PivotUserDinas','user_id');
     }
+    
     function userkepala(){
 		// return $this->hasMany('App\Models\MasterKepalaDinas','user_id');
 		return $this->hasOne('App\Models\MasterKepalaDinas','user_id');
