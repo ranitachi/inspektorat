@@ -40,7 +40,9 @@
                         {{ $countkejadian }}
                     </td>
                     <td style="text-align:center;">
-                        {{ round($countkejadian/$totalkejadian*100, 2) }} %
+                        @if ($totalkejadian!=0)
+                            {{ round($countkejadian/$totalkejadian*100, 2) }} %
+                        @endif
                     </td>
                     <td style="text-align:right;">
                         @php
