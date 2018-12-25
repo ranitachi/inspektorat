@@ -40,7 +40,13 @@ class DashboardController extends Controller
         } else if ($level == 3) { // admin opd
             $temuan = DetailTemuan::select('*', 'detail_temuan.flag as theflag')
                 ->join('daftar_temuan', 'daftar_temuan.id', '=', 'detail_temuan.daftar_id')
-                ->where('dinas_id', Auth::user()->user->dinas_id)->get();
+                ->where('dinas_id', Auth::user()->user->dinas_id)
+                ->where('detail_temuan.flag', '!=',0)
+                ->get();
+            // $temuan = DetailTemuan::select('*', 'detail_temuan.flag as theflag')
+            //     ->join('daftar_temuan', 'daftar_temuan.id', '=', 'detail_temuan.daftar_id')
+            //     ->where('dinas_id', Auth::user()->user->dinas_id)
+            //     ->get();
 
             foreach ($temuan as $value) {
                 if ($value->theflag==0) {

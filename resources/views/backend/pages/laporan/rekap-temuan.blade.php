@@ -41,10 +41,10 @@
                                         <button class="btn btn-sm btn-info" style="height:24px !important;padding-top:0px !important;">{{isset($d[$item->id]) ? count($d[$item->id]) : 0}}</button>
                                     </td>
                                     <td class="text-center">
-                                        <button class="btn btn-sm btn-success" style="height:24px !important;padding-top:0px !important;">{{isset($selesai[$item->id]) ? count($selesai[$item->id]) : 0}}</button>
+                                        <button class="btn btn-sm btn-success" style="height:24px !important;padding-top:0px !important;">{{isset($baru[$item->id]) ? count($baru[$item->id]) : 0}}</button>
                                     </td>
                                     <td class="text-center">
-                                        <button class="btn btn-sm btn-default" style="height:24px !important;padding-top:0px !important;background:#ccc;">{{isset($baru[$item->id]) ? count($baru[$item->id]) : 0}}</button>
+                                        <button class="btn btn-sm btn-default" style="height:24px !important;padding-top:0px !important;background:#ccc;">{{isset($selesai[$item->id]) ? count($selesai[$item->id]) : 0}}</button>
                                     </td>
                                     <td class="text-center">
                                         <button class="btn btn-sm btn-warning" style="height:24px !important;padding-top:0px !important;">{{isset($tujuh[$item->id]) ? count($tujuh[$item->id]) : 0}}</button>

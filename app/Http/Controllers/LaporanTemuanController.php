@@ -20,25 +20,42 @@ class LaporanTemuanController extends Controller
     {
         $dinas=MasterDinas::all();
         $daftar=DaftarTemuan::all();
-        $d=$selesai=$baru=$tujuh=$enampuluh=array();
-        foreach($daftar as $k=>$v)
+        $detail=DetailTemuan::all();
+        $det=array();
+        foreach($detail as $k=>$v)
         {
-            $selisih=selisihhari($v->created_at,date('Y-m-d'));
-            $d[$v->dinas_id][]=$v;
-            if($v->flag==1)
-                $selesai[$v->dinas_id][]=$v;
-            else
+            $det[$v->daftar_id][]=$v;
+        }
+        // dd($det);
+        $d=$selesai=$baru=$tujuh=$enampuluh=array();
+        foreach($daftar as $k=>$items)
+        {
+            if(isset($det[$items->id]))
             {
-                if($selisih<=7)
-                    $baru[$v->dinas_id][]=$v;
+                foreach($det[$items->id] as $idx=>$v)
+                {
+                    // echo 'aa';
+                    $selisih=selisihhari($v->created_at,date('Y-m-d'));
+                    echo $selisih.'-';
+                    $d[$items->dinas_id][]=$v;
+                    if($v->flag==1)
+                        $selesai[$items->dinas_id][]=$v;
+                    else
+                    {
+                        if($selisih<=43)
+                            $baru[$items->dinas_id][]=$v;
+                        
+                        if($selisih>43 && $selisih<=60)
+                            $tujuh[$items->dinas_id][]=$v;
+                        
+                        if($selisih>60)
+                            $enampuluh[$items->dinas_id][]=$v;
+                    }
+                }
                 
-                if($selisih>43 && $selisih<=60)
-                    $tujuh[$v->dinas_id][]=$v;
-                
-                if($selisih>60)
-                    $enampuluh[$v->dinas_id][]=$v;
             }
         }
+        // dd("");
         return view('backend.pages.laporan.rekap-temuan')->with('dinas',$dinas)
             ->with(['d'=>$d,
                     'selesai'=>$selesai,

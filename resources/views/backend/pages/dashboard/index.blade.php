@@ -127,6 +127,7 @@
 					<th>Status</th>
 				</tr>
 				@foreach ($temuan as $key => $item)
+				
 					<tr>
 						<td>{{ $key = $key + 1 }}</td>
 						<td>{{ $item->daftar->no_pengawasan }}</td>

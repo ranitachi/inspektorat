@@ -37,13 +37,25 @@ class DaftarTemuanController extends Controller
         {       
             if($dinas_id==-1) {
                 $daftar=DaftarTemuan::with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
-            } else
+            } 
+            else
             {
-                if($tahun==-1 && $bidang_id==-1) {
-                    $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+                if(Auth::user()->level==3)
+                {
+                    if($tahun==-1 && $bidang_id==-1) {
+                        $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id])->where('flag','!=',0)->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+                    }
+                    else
+                        $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun,'pengawasan_id'=>$bidang_id])->where('flag','!=',0)->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
                 }
                 else
-                    $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun,'pengawasan_id'=>$bidang_id])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+                {
+                    if($tahun==-1 && $bidang_id==-1) {
+                        $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+                    }
+                    else
+                        $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun,'pengawasan_id'=>$bidang_id])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+                }
             }
         }
         else

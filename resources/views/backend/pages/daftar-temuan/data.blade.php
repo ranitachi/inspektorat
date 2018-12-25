@@ -82,7 +82,7 @@
 								$selisih=selisihhari(date('Y-m-d'),$tglbatas,0);
 								// echo $selisih;
 							@endphp
-							@if ($selisih<=7)
+							@if ($selisih<=43)
 								<button class="btn btn-xs btn-danger" style="height:24px !important;"><i class="fa fa-Example of fa-exclamation-triangle"></i> {{$selisih}} Hari Lagi</button>
 							@else
 								<button class="btn btn-xs btn-info" style="height:24px !important;"><i class="fa fa-calendar"></i> {{date('d/m/Y',strtotime($tglbatas))}}</button>	
