@@ -24,7 +24,7 @@ class DashboardController extends Controller
         $mv = $btl = $ttl = $sel = 0;
 
         if ($level == 1 || $level == 2) { // administrator or operator
-            $temuan = DetailTemuan::all();
+            $temuan = DetailTemuan::orderby('created_at', 'desc')->get();
 
             foreach ($temuan as $value) {
                 if ($value->flag==0) {
@@ -42,6 +42,8 @@ class DashboardController extends Controller
                 ->join('daftar_temuan', 'daftar_temuan.id', '=', 'detail_temuan.daftar_id')
                 ->where('dinas_id', Auth::user()->user->dinas_id)
                 ->where('detail_temuan.flag', '!=',0)
+                ->orderby('created_at', 'desc')
+                ->limit(5)
                 ->get();
             // $temuan = DetailTemuan::select('*', 'detail_temuan.flag as theflag')
             //     ->join('daftar_temuan', 'daftar_temuan.id', '=', 'detail_temuan.daftar_id')
