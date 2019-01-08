@@ -19,6 +19,7 @@
         <tbody>
             @php
                 $totalkerugian = 0;
+                $totalpersen = 0;
             @endphp
             @foreach ($rekom as $key => $item)
                 <tr>
@@ -41,7 +42,15 @@
                     </td>
                     <td style="text-align:center;">
                         @if ($totalkejadian!=0)
-                            {{ round($countkejadian/$totalkejadian*100, 2) }} %
+                            @php
+                                $persen = round($countkejadian/$totalkejadian*100, 2)
+                            @endphp
+                            {{ $persen }} %
+                            @php
+                                $totalpersen += $persen;
+                            @endphp
+                        @else
+                            0
                         @endif
                     </td>
                     <td style="text-align:right;">
@@ -66,7 +75,7 @@
                 <tr>
                     <td colspan="3" style="text-align:right;">Jumlah &nbsp;&nbsp;&nbsp;</td>
                     <td style="text-align:center;">{{ $totalkejadian }}</td>
-                    <td style="text-align:center;">100 %</td>
+                    <td style="text-align:center;">{{ round($totalpersen, 1) }} % <br> <i>(Pembulatan)</i></td>
                     <td style="text-align:right;">{{ number_format($totalkerugian, 0) }}</td>
                 </tr>
         </tbody>

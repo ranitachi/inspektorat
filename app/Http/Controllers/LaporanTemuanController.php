@@ -113,12 +113,16 @@ class LaporanTemuanController extends Controller
                     'enampuluh'=>$enampuluh]);
     }
 
-    public function rekomendasi_temuan()
+    public function rekomendasi_temuan($tahun)
     {
         $nilai = DetailTemuan::select('rekomendasi_id', DB::RAW('SUM(kerugian) as nilai_kerugian'))
+            ->join('daftar_temuan', 'detail_temuan.daftar_id', '=', 'daftar_temuan.id')
+            ->where('tahun', $tahun)
             ->groupby('rekomendasi_id')->get();
 
         $kejadian = DetailTemuan::select('rekomendasi_id', DB::RAW('COUNT(*) as jumlah_kejadian'))
+            ->join('daftar_temuan', 'detail_temuan.daftar_id', '=', 'daftar_temuan.id')
+            ->where('tahun', $tahun)
             ->groupby('rekomendasi_id')->get();
 
         $rekom = MasterRekomendasi::all();
@@ -131,16 +135,21 @@ class LaporanTemuanController extends Controller
         return view('backend.pages.laporan.rekomendasi-temuan')
             ->with('nilai', $nilai)
             ->with('rekom', $rekom)
+            ->with('tahun', $tahun)
             ->with('totalkejadian', $totalkejadian)
             ->with('kejadian', $kejadian);
     }
 
-    public function print_rekomendasi_temuan()
+    public function print_rekomendasi_temuan($tahun)
     {
         $nilai = DetailTemuan::select('rekomendasi_id', DB::RAW('SUM(kerugian) as nilai_kerugian'))
+            ->join('daftar_temuan', 'detail_temuan.daftar_id', '=', 'daftar_temuan.id')
+            ->where('tahun', $tahun)
             ->groupby('rekomendasi_id')->get();
 
         $kejadian = DetailTemuan::select('rekomendasi_id', DB::RAW('COUNT(*) as jumlah_kejadian'))
+            ->join('daftar_temuan', 'detail_temuan.daftar_id', '=', 'daftar_temuan.id')
+            ->where('tahun', $tahun)
             ->groupby('rekomendasi_id')->get();
 
         $rekom = MasterRekomendasi::all();
@@ -157,12 +166,16 @@ class LaporanTemuanController extends Controller
             ->with('kejadian', $kejadian);
     }
 
-    public function kelompok_temuan()
+    public function kelompok_temuan($tahun)
     {
         $nilai = DetailTemuan::select('temuan_id', DB::RAW('SUM(kerugian) as nilai_kerugian'))
+            ->join('daftar_temuan', 'detail_temuan.daftar_id', '=', 'daftar_temuan.id')
+            ->where('tahun', $tahun)
             ->groupby('temuan_id')->get();
 
         $kejadian = DetailTemuan::select('temuan_id', DB::RAW('COUNT(*) as jumlah_kejadian'))
+            ->join('daftar_temuan', 'detail_temuan.daftar_id', '=', 'daftar_temuan.id')
+            ->where('tahun', $tahun)
             ->groupby('temuan_id')->get();
 
         $temuan = MasterTemuan::all();
@@ -175,16 +188,21 @@ class LaporanTemuanController extends Controller
         return view('backend.pages.laporan.kelompok-temuan')
             ->with('nilai', $nilai)
             ->with('temuan', $temuan)
+            ->with('tahun', $tahun)
             ->with('totalkejadian', $totalkejadian)
             ->with('kejadian', $kejadian);
     }
 
-    public function print_kelompok_temuan()
+    public function print_kelompok_temuan($tahun)
     {
         $nilai = DetailTemuan::select('temuan_id', DB::RAW('SUM(kerugian) as nilai_kerugian'))
+            ->join('daftar_temuan', 'detail_temuan.daftar_id', '=', 'daftar_temuan.id')
+            ->where('tahun', $tahun)
             ->groupby('temuan_id')->get();
 
         $kejadian = DetailTemuan::select('temuan_id', DB::RAW('COUNT(*) as jumlah_kejadian'))
+            ->join('daftar_temuan', 'detail_temuan.daftar_id', '=', 'daftar_temuan.id')
+            ->where('tahun', $tahun)
             ->groupby('temuan_id')->get();
 
         $temuan = MasterTemuan::all();
@@ -197,6 +215,7 @@ class LaporanTemuanController extends Controller
         return view('backend.pages.laporan.print-kelompok-temuan')
             ->with('nilai', $nilai)
             ->with('temuan', $temuan)
+            ->with('tahun', $tahun)
             ->with('totalkejadian', $totalkejadian)
             ->with('kejadian', $kejadian);
     }

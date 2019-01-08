@@ -22,8 +22,8 @@ class DaftarTemuanController extends Controller
 
         if (Auth::user()->level==2) {
             return view('backend.pages.daftar-temuan.index')
-                ->with('dinas',$dinas)
-                ->with('bidang',$bidang);
+            ->with('dinas',$dinas)
+            ->with('bidang',$bidang);
         } else {
             return view('backend.pages.list-temuan.index')
                 ->with('dinas',$dinas)
@@ -62,6 +62,7 @@ class DaftarTemuanController extends Controller
         {
             $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
         }
+        
         $detail=DetailTemuan::with(['daftar','temuan','sebab','rekomendasi','tindak_lanjut_temuan'])->get();
         $det=array();
         foreach($detail as $k=>$v)
