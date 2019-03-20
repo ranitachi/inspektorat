@@ -3,23 +3,23 @@
 		<a href="{{url('detail-form/'.(isset($daftar[0]->id) ? $daftar[0]->id : '-1').'/'.$dinas_id.'/'.$tahun.'/'.$bidang_id)}}" class="btn btn-success btn-xs pull-right">+ Tambah Detail</a>
 	</header>
 @endif
-<table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+<table id="table" class="table table-striped table-bordered" width="100%">
 	<thead>
 		<tr>
-			<th class="text-center" rowspan="2" style="width:15px;">#</th>
-			<th class="text-center" rowspan="2">Bidang Pengawasan<br>No & Tgl LHP</th>
-			<th class="text-center" rowspan="2">Temuan / Penyebab<br>(Uraian Ringkas)</th>
-			<th class="text-center" rowspan="2">Kode Temuan</th>
-			<th class="text-center" rowspan="2">Rekomendasi<br>(Uraian Ringkas)</th>
-			<th class="text-center" rowspan="2">Kode Rekomendasi</th>
+			<th class="text-center"  style="width:15px;">#</th>
+			<th class="text-center" >Bidang Pengawasan<br>No & Tgl LHP</th>
+			<th class="text-center" >Temuan / Penyebab<br>(Uraian Ringkas)</th>
+			<th class="text-center" >Kode Temuan</th>
+			<th class="text-center" >Rekomendasi<br>(Uraian Ringkas)</th>
+			<th class="text-center" >Kode Rekomendasi</th>
 			@if (Auth::user()->level==3)
-				<th class="text-center" rowspan="2">Tindak Lanjut</th>
+				<th class="text-center" >Tindak Lanjut</th>
 			@else
-				<th class="text-center" rowspan="2">Status</th>
+				<th class="text-center" >Status</th>
 			@endif
-			<th class="text-center" rowspan="2">Harus Selesai<br>Tanggal</th>
+			<th class="text-center" >Harus Selesai<br>Tanggal</th>
 			@if (Auth::user()->level!=3)
-			<th class="text-center" rowspan="2">Aksi</th>
+			<th class="text-center" >Aksi</th>
 			@endif
         </tr>
 	</thead>

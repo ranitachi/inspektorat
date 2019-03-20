@@ -33,7 +33,11 @@ class DaftarTemuanController extends Controller
 
     public function data($dinas_id=null,$tahun=null,$bidang_id=null)
     {
-        if($bidang_id!=null)
+        if($tahun==-1)
+            $tahun=date('Y');
+        else
+            $tahun=$tahun;
+        if($bidang_id!=-1)
         {       
             if($dinas_id==-1) {
                 $daftar=DaftarTemuan::with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
@@ -43,10 +47,13 @@ class DaftarTemuanController extends Controller
                 if(Auth::user()->level==3)
                 {
                     if($tahun==-1 && $bidang_id==-1) {
-                        $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id])->where('flag','!=',0)->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+                        $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
                     }
                     else
-                        $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun,'pengawasan_id'=>$bidang_id])->where('flag','!=',0)->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+                        $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun,'pengawasan_id'=>$bidang_id])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+
+                    // $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+                    // return $daftar;
                 }
                 else
                 {
@@ -55,13 +62,17 @@ class DaftarTemuanController extends Controller
                     }
                     else
                         $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun,'pengawasan_id'=>$bidang_id])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+
+                        
                 }
+                // return $daftar;
             }
         }
         else
         {
             $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
         }
+        
         $detail=DetailTemuan::with(['daftar','temuan','sebab','rekomendasi','tindak_lanjut_temuan'])->get();
         $det=array();
         foreach($detail as $k=>$v)
