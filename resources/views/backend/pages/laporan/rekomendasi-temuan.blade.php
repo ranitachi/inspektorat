@@ -12,12 +12,17 @@
                     <span class="widget-title">Rekomendasi Temuan Tahun 2018</span>
                 </div>
                 <div class="col-md-2">
-                    <select name="tahun" class="form-control pull-right">
-                        <option value="">Tahun 2018</option>
+                    @php
+                        $tahunloop = $tahun - 2;
+                    @endphp
+                    <select name="tahun" class="form-control pull-right" id="pilih_tahun">
+                        @for ($i = $tahunloop; $i < $tahun + 3; $i++)
+                            <option value="{{ $i }}" {{ $i == $tahun ? 'selected' : '' }}>Tahun {{ $i }}</option>
+                        @endfor
                     </select>
                 </div>
                 <div class="col-md-2">
-                    <a href="{{ route('print-rekomendasi-temuan') }}" target="_blank" class="btn btn-primary">Cetak Laporan</a>
+                    <a href="{{ route('print-rekomendasi-temuan', $tahun) }}" target="_blank" class="btn btn-primary">Cetak Laporan</a>
                 </div>
 			</header><!-- .widget-header -->
 			<hr class="widget-separator">
@@ -55,7 +60,11 @@
                                         {{ $countkejadian }}
                                     </td>
                                     <td style="text-align:center;">
-                                        {{ round($countkejadian/$totalkejadian*100, 2) }} %
+                                        @if (!is_null($totalkejadian) && $totalkejadian!=0)
+                                            {{ round($countkejadian/$totalkejadian*100, 2) }} %
+                                        @else
+                                            0
+                                        @endif
                                     </td>
                                     <td style="text-align:right;">
                                         @php
@@ -101,6 +110,11 @@
         $('#table').on('click', '.btn-delete', function(){
             var id = $(this).data('value')
 			$('#form-delete').attr('action', "{{ url('users') }}/"+id)			
+        })
+
+        $('#pilih_tahun').change(function(){
+            var tahun = $(this).val()
+            window.location.href = "{{ url('rekomendasi-temuan') }}" + "/" + tahun
         })
 	</script>
 @endsection

@@ -22,8 +22,8 @@ class DaftarTemuanController extends Controller
 
         if (Auth::user()->level==2) {
             return view('backend.pages.daftar-temuan.index')
-                ->with('dinas',$dinas)
-                ->with('bidang',$bidang);
+            ->with('dinas',$dinas)
+            ->with('bidang',$bidang);
         } else {
             return view('backend.pages.list-temuan.index')
                 ->with('dinas',$dinas)

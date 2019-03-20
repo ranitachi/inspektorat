@@ -36,11 +36,11 @@ Route::get('tindak-lanjut/{id}/selesai', 'TindakLanjutTemuanController@selesai')
 Route::get('rekap-temuan','LaporanTemuanController@index')->middleware('auth');
 Route::get('rekap-temuan-detail/{opd}','LaporanTemuanController@rekapdetail')->middleware('auth');
 
-Route::get('rekomendasi-temuan', 'LaporanTemuanController@rekomendasi_temuan')->name('rekomendasi-temuan')->middleware('auth');
-Route::get('print-rekomendasi-temuan', 'LaporanTemuanController@print_rekomendasi_temuan')->name('print-rekomendasi-temuan')->middleware('auth');
+Route::get('rekomendasi-temuan/{tahun}', 'LaporanTemuanController@rekomendasi_temuan')->name('rekomendasi-temuan')->middleware('auth');
+Route::get('print-rekomendasi-temuan/{tahun}', 'LaporanTemuanController@print_rekomendasi_temuan')->name('print-rekomendasi-temuan')->middleware('auth');
 
-Route::get('laporan-kelompok-temuan', 'LaporanTemuanController@kelompok_temuan')->name('laporan-kelompok-temuan')->middleware('auth');
-Route::get('print-kelompok-temuan', 'LaporanTemuanController@print_kelompok_temuan')->name('print-kelompok-temuan')->middleware('auth');
+Route::get('laporan-kelompok-temuan/{tahun}', 'LaporanTemuanController@kelompok_temuan')->name('laporan-kelompok-temuan')->middleware('auth');
+Route::get('print-kelompok-temuan/{tahun}', 'LaporanTemuanController@print_kelompok_temuan')->name('print-kelompok-temuan')->middleware('auth');
 
 Route::resource('list-temuan','DaftarTemuanController')->middleware('auth');
 Route::get('list-temuan-data/{dinas_id?}/{tahun?}/{bidang_id?}','DaftarTemuanController@data')->middleware('auth');

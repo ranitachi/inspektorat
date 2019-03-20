@@ -67,62 +67,6 @@
 		<div class="widget">
 			<header class="widget-header">
 				<span class="widget-title">Daftar Temuan</span>
-                
-                {{-- @if (!Auth::user()->level==1 || Auth::user()->level==2) --}}
-                    <div class="row">
-                        <div class="col-md-8">&nbsp;</div>
-                        <div class="col-md-3 text-right">
-                            <select name="dinas_id" id="dinas_id" class="form-control text-left" data-plugin="select2" style="text-align:left !important" onchange="getdata()">
-                                <option value="">-- Pilih Dinas --</option>
-                                @foreach ($dinas as $item)
-                                    @if (Auth::user()->level==3 || Auth::user()->level==4)
-                                        @php
-                                            $user=\App\User::where('id',Auth::user()->id)->with('user')->first();
-                                            $dinas_id=$user->user->dinas_id;
-                                        @endphp
-                                        @if ($dinas_id==$item->id)
-                                            <option value="{{$item->id}}" selected="selected">{{$item->nama_dinas}}</option>
-                                        @endif
-                                    @else
-                                        @if ($dinas_id==$item->id)
-                                            <option value="{{$item->id}}" selected="selected">{{$item->nama_dinas}}</option>
-                                        @else    
-                                            <option value="{{$item->id}}">{{$item->nama_dinas}}</option>
-                                        @endif    
-                                    @endif
-                                    
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-1 text-right">
-                            <select name="tahun" id="tahun" class="form-control text-left" data-plugin="select2" onchange="getdata()">
-                                @for ($i = (date('Y')); $i >= (date('Y')-5); $i--)
-                                    @if ($tahun==$i)
-                                        <option value="{{$i}}" selected="selected"}}>{{$i}}</option>
-                                    @else
-                                        <option value="{{$i}}">{{$i}}</option>
-                                    @endif
-                                @endfor
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top:5px;">
-                                <div class="col-md-8">&nbsp;</div>
-                                
-                                <div class="col-md-4 text-right">
-                                    <select name="bidang" id="bidang" class="form-control text-left" data-plugin="select2" onchange="getdata()">
-                                    <option value="">-- Pilih Bidang Pengawasan --</option>
-                                        @foreach ($bidang as $item)
-                                            @if ($item->id==$pengawasan_id)
-                                                <option value="{{$item->id}}" selected="selected">{{$item->bidang}}</option>
-                                            @else
-                                                <option value="{{$item->id}}">{{$item->bidang}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                {{-- @endif --}}
             </header>
             
 			<hr class="widget-separator">
@@ -171,6 +115,7 @@
             var bidang=$('#bidang').val();
             loaddata(dinas_id,tahun,bidang);
         }
+        
         function loaddata(dinas_id,tahun,bidang)
         {
             if(bidang!='')

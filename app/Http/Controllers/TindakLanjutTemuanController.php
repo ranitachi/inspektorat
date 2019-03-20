@@ -109,7 +109,7 @@ class TindakLanjutTemuanController extends Controller
     public function show($id)
     {
         $tindaklanjut = TindakLanjutTemuan::findOrFail($id);
-        $temuan = DetailTemuan::with('pengawasan')->findOrFail($tindaklanjut->detail_id);
+        $temuan = DetailTemuan::with('pengawasan')->with('daftar')->findOrFail($tindaklanjut->detail_id);
 
         return view('backend.pages.tanggapan.show')
             ->with('temuan', $temuan)
