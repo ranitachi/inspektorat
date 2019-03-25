@@ -7,7 +7,8 @@
 	<div class="col-md-12">
 		<div class="widget">
 			<header class="widget-header">
-				<span class="widget-title">Tambah Detail Temuan</span>
+                <span class="widget-title"><a href="{{url('temuan')}}">Daftar Temuan</a></span> >> <span class="widget-title">Tambah Detail Temuan</span>
+                <a href="{{url('temuan/'.$daftar->id)}}" class="btn btn-sm btn-info pull-right"><i class="fa fa-chevron-left"></i>&nbsp;Kembali</a>
             </header>
 			<hr class="widget-separator">
 			<div class="widget-body">
@@ -188,7 +189,7 @@
 </script>
 <script>
     $(document).ready(function(){
-        
+        //kerugian
     });
 </script>
 <style>

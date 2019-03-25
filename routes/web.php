@@ -42,6 +42,7 @@ Route::get('print-rekomendasi-temuan/{tahun}', 'LaporanTemuanController@print_re
 Route::get('laporan-kelompok-temuan/{tahun}', 'LaporanTemuanController@kelompok_temuan')->name('laporan-kelompok-temuan')->middleware('auth');
 Route::get('print-kelompok-temuan/{tahun}', 'LaporanTemuanController@print_kelompok_temuan')->name('print-kelompok-temuan')->middleware('auth');
 
+Route::resource('temuan','DaftarTemuanController')->middleware('auth');
 Route::resource('list-temuan','DaftarTemuanController')->middleware('auth');
 Route::get('list-temuan-data/{dinas_id?}/{tahun?}/{bidang_id?}','DaftarTemuanController@data')->middleware('auth');
 Route::get('detail-form/{daftar_id}/{dinas_id?}/{tahun?}/{bidang_id?}','DaftarTemuanController@form_detail')->middleware('auth');

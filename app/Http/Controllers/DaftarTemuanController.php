@@ -23,37 +23,56 @@ class DaftarTemuanController extends Controller
 
         $tahun=date('Y');
 
-        if (Auth::user()->level==2) {
-            return view('backend.pages.daftar-temuan.index')
-            ->with('dinas',$dinas)
-            ->with('tahun',$tahun)
-            ->with('bidang',$bidang);
-        } else {
-
+        if (Auth::user()->level==2) 
+        {
+            $dinas_id=-1;
+        } 
+        else 
+        {
             $din=PivotUserDinas::where('user_id',Auth::user()->id)->first();
             if(Auth::user()->level==1)
                 $dinas_id=-1;
             else
                 $dinas_id=$din->dinas_id;
+        }
+
+        return view('backend.pages.temuan.index')
+            ->with('dinas_id',$dinas_id)
+            ->with('dinas',$dinas)
+            ->with('tahun',$tahun)
+            ->with('bidang',$bidang);
+
+        // if (Auth::user()->level==2) {
+        //     return view('backend.pages.daftar-temuan.index')
+        //     ->with('dinas',$dinas)
+        //     ->with('tahun',$tahun)
+        //     ->with('bidang',$bidang);
+        // } else {
+
+        //     $din=PivotUserDinas::where('user_id',Auth::user()->id)->first();
+        //     if(Auth::user()->level==1)
+        //         $dinas_id=-1;
+        //     else
+        //         $dinas_id=$din->dinas_id;
             
             
 
-            if(Auth::user()->level==1)
-            {
-                return view('backend.pages.daftar-temuan.index')
-                    ->with('dinas',$dinas)
-                    ->with('tahun',$tahun)
-                    ->with('bidang',$bidang);    
-            }
-            else
-            {
-                // return $dinas_id;
-                return view('backend.pages.list-temuan.index')
-                    ->with('dinas',$dinas_id)
-                    ->with('tahun',$tahun)
-                    ->with('bidang',$bidang);
-            }
-        }
+        //     if(Auth::user()->level==1)
+        //     {
+        //         return view('backend.pages.daftar-temuan.index')
+        //             ->with('dinas',$dinas)
+        //             ->with('tahun',$tahun)
+        //             ->with('bidang',$bidang);    
+        //     }
+        //     else
+        //     {
+        //         // return $dinas_id;
+        //         return view('backend.pages.list-temuan.index')
+        //             ->with('dinas',$dinas_id)
+        //             ->with('tahun',$tahun)
+        //             ->with('bidang',$bidang);
+        //     }
+        // }
     }
 
     public function data($dinas_id=null,$tahun=null,$bidang_id=null)
@@ -113,14 +132,28 @@ class DaftarTemuanController extends Controller
         {
             $det[$v->daftar_id][]=$v;
         }
-        return view('backend.pages.daftar-temuan.data')
+        return view('backend.pages.temuan.data')
             ->with('det',$det)
             ->with('dinas_id',$dinas_id)
             ->with('tahun',$tahun)
             ->with('bidang_id',$bidang_id)
             ->with('daftar',$daftar);
     }
+    public function show($id)
+    {
+        $temuan=DaftarTemuan::find($id);
+        // return $temuan;
+        $detail=DetailTemuan::with(['daftar','temuan','sebab','rekomendasi','tindak_lanjut_temuan'])->get();
+        foreach($detail as $k=>$v)
+        {
+            $det[$v->daftar_id][]=$v;
+        }
 
+        return view('backend.pages.temuan.detail')
+            ->with('temuan',$temuan)
+            ->with('det',$det)
+            ->with('id',$id);
+    }
     public function create()
     {
         $dinas=MasterDinas::all();
@@ -223,7 +256,8 @@ class DaftarTemuanController extends Controller
             $detail->save();
         }
 
-        return redirect('list-temuan')
+        // return redirect('list-temuan')
+        return redirect('temuan/'.$daftar_id)
             ->with('success', 'Daftar Temuan berhasil Ditambahkan')
             ->with('dinas_id',$request->dinas_id)
             ->with('tahun',$request->tahun)
@@ -247,7 +281,8 @@ class DaftarTemuanController extends Controller
         $detail->save();
         
 
-        return redirect('list-temuan')
+        // return redirect('list-temuan')
+        return redirect('temuan/'.$detail->daftar_id)
             ->with('success', 'Daftar Temuan berhasil Diperbaharui')
             ->with('dinas_id',$request->dinas_id)
             ->with('tahun',$request->tahun)
@@ -261,7 +296,8 @@ class DaftarTemuanController extends Controller
         $detail=DetailTemuan::find($id);
         $daftar=DaftarTemuan::find($detail->daftar_id);
         $detail->delete();
-        return redirect('list-temuan')
+        // return redirect('list-temuan')
+        return redirect('temuan/'.$daftar->id)
             ->with('success', 'Hapus Detail Temuan berhasil')
             ->with('dinas_id',$daftar->dinas_id)
             ->with('tahun',$daftar->tahun)
@@ -277,7 +313,8 @@ class DaftarTemuanController extends Controller
         
         $daftar=DaftarTemuan::find($detail->daftar_id);
         
-        return redirect('list-temuan')
+        // return redirect('list-temuan')
+        return redirect('temuan/'.$daftar->id)
             ->with('success', 'Verifikasi Detail Temuan berhasil')
             ->with('dinas_id',$daftar->dinas_id)
             ->with('tahun',$daftar->tahun)

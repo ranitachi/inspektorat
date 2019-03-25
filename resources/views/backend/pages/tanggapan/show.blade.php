@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+    
     <div class="col-md-12">
         @if ($temuan->flag==3)
             <div class="alert alert-info" role="alert">
@@ -24,8 +25,15 @@
     </div>
 
 	<div class="col-md-12">
+        
         <div class="promo-footer" style="background:#fff;">
+            <header class="widget-header">
+                <span class="widget-title"><a href="{{url('temuan')}}">Daftar Temuan</a></span>
+                </a></span>
+                <a href="{{url('temuan/'.$temuan->daftar_id)}}" class="btn btn-sm btn-info pull-right"><i class="fa fa-chevron-left"></i>&nbsp;Kembali</a>
+            </header>
             <div class="row no-gutter">
+                
                 <div class="col-sm-4 promo-tab">
                     <div class="text-right">
                         <small style="margin-right:30px;">Bidang Pengawasan</small>

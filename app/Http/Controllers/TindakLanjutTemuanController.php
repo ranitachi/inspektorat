@@ -53,8 +53,10 @@ class TindakLanjutTemuanController extends Controller
             $detail->flag = 3;
             $detail->save();
         });
-
-        return redirect()->route('list-temuan.index')
+        
+        $detail=DetailTemuan::find($request->detail_id);
+        // return redirect()->route('list-temuan.index')
+        return redirect('temuan/'.$detail->daftar_id)
             ->with('success', 'Anda telah memasukkan data baru.');
     }
 
@@ -101,8 +103,10 @@ class TindakLanjutTemuanController extends Controller
                 $insert->save();
             }
         });
-
-        return redirect()->route('list-temuan.index')
+        $tindak = TindakLanjutTemuan::find($id); 
+        $detail=DetailTemuan::find($tindak->detail_id);
+        // return redirect()->route('list-temuan.index')
+        return redirect('temuan/'.$detail->daftar_id)
             ->with('success', 'Anda telah mengubah data tindak lanjut temuan.');
     }
 
