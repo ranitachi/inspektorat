@@ -49,7 +49,7 @@
 @endsection
 @section('content')
 @php
-    $dinas_id=$tahun=$pengawasan_id='';
+    $pengawasan_id='-1';
     if(Session::has('dinas_id'))
     {
         $dinas_id=Session::get('dinas_id');
@@ -66,7 +66,24 @@
 	<div class="col-md-12">
 		<div class="widget">
 			<header class="widget-header">
-				<span class="widget-title">Daftar Temuan</span>
+                <span class="widget-title">Daftar Temuan</span>
+                <div class="row">
+                        <div class="col-md-8">&nbsp;</div>
+                        <div class="col-md-3 text-right">
+                            &nbsp;
+                        </div>
+                        <div class="col-md-1 text-right">
+                            <select name="tahun" id="tahun" class="form-control text-left" data-plugin="select2" onchange="getdata()">
+                                @for ($i = (date('Y')-5); $i <= (date('Y')); $i++)
+                                    @if ($tahun==$i)
+                                        <option value="{{$i}}" selected="selected"}}>{{$i}}</option>
+                                    @else
+                                        <option value="{{$i}}">{{$i}}</option>
+                                    @endif
+                                @endfor
+                            </select>
+                        </div>
+                    </div>
             </header>
             
 			<hr class="widget-separator">
@@ -92,10 +109,12 @@
     <script src="{{asset('theme/backend/libs/misc/datatables/datatables.min.js')}}"></script>
 	<script>
         // loaddata(-1,-1);
-        var dinas_id='{{$dinas_id}}';
+        var dinas_id='{{$dinas}}';
         var tahun='{{$tahun}}';
         var pengawasan_id='{{$pengawasan_id}}';
         
+
+        // alert(dinas_id+'=='+tahun)
         if(dinas_id!='' && tahun!='' && pengawasan_id!='')
         {
             loaddata(dinas_id,tahun,pengawasan_id);
@@ -103,16 +122,22 @@
         else
         {
             if(dinas_id!='')
-                loaddata(dinas_id,-1,-1);
+            {
+                if(tahun=='')
+                    loaddata(dinas_id,'{{date("Y")}}',-1);
+                else
+                    loaddata(dinas_id,tahun,-1);
+
+            }
             else
                 loaddata(-1,-1,-1);
         }
 
         function getdata()
         {
-            var dinas_id=$('#dinas_id').val();
+            var dinas_id='{{$dinas}}';
             var tahun=$('#tahun').val();
-            var bidang=$('#bidang').val();
+            var bidang='-1';
             loaddata(dinas_id,tahun,bidang);
         }
         

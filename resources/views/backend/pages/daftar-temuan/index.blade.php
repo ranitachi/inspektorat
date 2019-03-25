@@ -49,7 +49,7 @@
 @endsection
 @section('content')
 @php
-    $dinas_id=$tahun=$pengawasan_id='';
+    $dinas_id=$pengawasan_id='-1';
     if(Session::has('dinas_id'))
     {
         $dinas_id=Session::get('dinas_id');
@@ -57,6 +57,7 @@
     if(Session::has('tahun'))
     {
         $tahun=Session::get('tahun');
+        
     }                                    
     if(Session::has('pengawasan_id'))
     {
@@ -153,13 +154,14 @@
         var tahun='{{$tahun}}';
         var pengawasan_id='{{$pengawasan_id}}';
         
+        // alert(dinas_id)
 
         if(dinas_id!='' && tahun!='' && pengawasan_id!='')
         {
             loaddata(dinas_id,tahun,pengawasan_id);
         }
         else
-            loaddata(-1,-1,-1);
+            loaddata(dinas_id,tahun,-1);
 
 
         function getdata()

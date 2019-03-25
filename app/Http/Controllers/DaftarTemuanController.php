@@ -9,6 +9,7 @@ use App\Models\MasterDinas;
 use App\Models\MasterBidangPengawasan;
 use App\Models\MasterTemuan;
 use App\Models\MasterSebab;
+use App\Models\PivotUserDinas;
 use App\Models\MasterRekomendasi;
 
 use Auth;
@@ -20,27 +21,54 @@ class DaftarTemuanController extends Controller
         $dinas=MasterDinas::all();
         $bidang=MasterBidangPengawasan::all();
 
+        $tahun=date('Y');
+
         if (Auth::user()->level==2) {
             return view('backend.pages.daftar-temuan.index')
             ->with('dinas',$dinas)
+            ->with('tahun',$tahun)
             ->with('bidang',$bidang);
         } else {
-            return view('backend.pages.list-temuan.index')
-                ->with('dinas',$dinas)
-                ->with('bidang',$bidang);
+
+            $din=PivotUserDinas::where('user_id',Auth::user()->id)->first();
+            if(Auth::user()->level==1)
+                $dinas_id=-1;
+            else
+                $dinas_id=$din->dinas_id;
+            
+            
+
+            if(Auth::user()->level==1)
+            {
+                return view('backend.pages.daftar-temuan.index')
+                    ->with('dinas',$dinas)
+                    ->with('tahun',$tahun)
+                    ->with('bidang',$bidang);    
+            }
+            else
+            {
+                // return $dinas_id;
+                return view('backend.pages.list-temuan.index')
+                    ->with('dinas',$dinas_id)
+                    ->with('tahun',$tahun)
+                    ->with('bidang',$bidang);
+            }
         }
     }
 
     public function data($dinas_id=null,$tahun=null,$bidang_id=null)
     {
-        if($tahun==-1)
+        if($tahun==-1 || $tahun==null)
             $tahun=date('Y');
         else
             $tahun=$tahun;
+
+
         if($bidang_id!=-1)
         {       
             if($dinas_id==-1) {
                 $daftar=DaftarTemuan::with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+                
             } 
             else
             {
@@ -53,7 +81,7 @@ class DaftarTemuanController extends Controller
                         $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun,'pengawasan_id'=>$bidang_id])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
 
                     // $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
-                    // return $daftar;
+                    
                 }
                 else
                 {
@@ -70,7 +98,13 @@ class DaftarTemuanController extends Controller
         }
         else
         {
-            $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+            // $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+            $daftar=DaftarTemuan::where(['tahun'=>$tahun])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+            if(Auth::user()->level==3)
+            {
+                $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+            }
+            // return $daftar;
         }
         
         $detail=DetailTemuan::with(['daftar','temuan','sebab','rekomendasi','tindak_lanjut_temuan'])->get();
