@@ -36,14 +36,17 @@
 						$tglbatas=adddate($uss->tgl_pengawasan,60);
 						$selisih=selisihhari(date('Y-m-d'),$tglbatas,0);
 						// echo $selisih;
-					@endphp
+                    @endphp
+                    
 					@if ($selisih<=30)
 						{{date('d-m-Y',strtotime($tglbatas))}} <br>
 						<i>({{$selisih}} Hari Lagi)</i>
 					@else
 						{{date('d-m-Y',strtotime($tglbatas))}} <br>
 						<i>({{$selisih}} Hari Lagi)</i>
-					@endif
+                    @endif
+                    
+                    
 					
                 </td>
                 
@@ -52,6 +55,9 @@
                             <a class="btn btn-xs btn-success btn-edit" href="{{url('temuan/'.$uss->id)}}" style="height:24px !important;">
                                 <i class="fa fa-eye"></i>
                             </a>
+                            {{-- <a class="btn btn-xs btn-info btn-edit" href="{{url('tindak-lanjut/create')}}" style="height:24px !important;">
+                                <i class="fa fa-edit"></i>
+                            </a> --}}
                             @if (Auth::user()->level!=3)
                                 @if (Auth::user()->level==2)
                                     <a class="btn btn-xs btn-info btn-edit" href="{{url('temuan/'.$uss->id.'/edit')}}" style="height:24px !important;">

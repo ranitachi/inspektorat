@@ -36,7 +36,7 @@ class LaporanTemuanController extends Controller
                 {
                     // echo 'aa';
                     $selisih=selisihhari($v->created_at,date('Y-m-d'));
-                    echo $selisih.'-';
+                    // echo $selisih.'-';
                     $d[$items->dinas_id][]=$v;
                     if($v->flag==1)
                         $selesai[$items->dinas_id][]=$v;

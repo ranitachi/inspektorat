@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Models\DaftarTemuan;
 use App\Models\DetailTemuan;
@@ -87,7 +88,6 @@ class DaftarTemuanController extends Controller
         {       
             if($dinas_id==-1) {
                 $daftar=DaftarTemuan::with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
-                
             } 
             else
             {
@@ -121,7 +121,12 @@ class DaftarTemuanController extends Controller
             $daftar=DaftarTemuan::where(['tahun'=>$tahun])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
             if(Auth::user()->level==3)
             {
-                $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+                if($dinas_id==-1) {
+                    $daftar=DaftarTemuan::where(['tahun'=>$tahun])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+                } 
+                else{
+                    $daftar=DaftarTemuan::where(['dinas_id'=>$dinas_id,'tahun'=>$tahun])->with(['pengawasan','aparat','dinas','daftar'])->orderBy('pengawasan_id')->get();
+                }
             }
             // return $daftar;
         }
@@ -143,12 +148,14 @@ class DaftarTemuanController extends Controller
     {
         $temuan=DaftarTemuan::find($id);
         // return $temuan;
-        $detail=DetailTemuan::with(['daftar','temuan','sebab','rekomendasi','tindak_lanjut_temuan'])->get();
+        $detail=DetailTemuan::where('daftar_id',$id)->with(['daftar','temuan','sebab','rekomendasi','tindak_lanjut_temuan'])->get();
+        $det = array();
         foreach($detail as $k=>$v)
         {
             $det[$v->daftar_id][]=$v;
         }
 
+        // return $det;
         return view('backend.pages.temuan.detail')
             ->with('temuan',$temuan)
             ->with('det',$det)
@@ -212,56 +219,67 @@ class DaftarTemuanController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request);
-        list($tgl,$bln,$thn)=explode('/',$request->tgl_pengawasan);
+        try{
+            DB::beginTransaction();
+            list($tgl,$bln,$thn)=explode('/',$request->tgl_pengawasan);
 
-        $aparat=MasterDinas::where('nama_dinas','like',"%Inspektorat%")->first();
+            $aparat=MasterDinas::where('nama_dinas','like',"%Inspektorat%")->first();
+            // return ($request);
+            $cekdaftar=DaftarTemuan::where('no_pengawasan',$request->no_pengawasan)
+                    ->where('dinas_id',$request->dinas_id)
+                    ->where('tahun',$request->tahun)->first();
 
-        $cekdaftar=DaftarTemuan::where('no_pengawasan',$request->no_pengawasan)
-                ->where('dinas_id',$request->dinas_id)
-                ->where('tahun',$request->tahun)->first();
+            if(is_null($cekdaftar))
+            {
+                $daftar=new DaftarTemuan;
+                $daftar->aparat_id=$aparat->id;
+                $daftar->dinas_id=$request->dinas_id;
+                $daftar->tahun=$request->tahun;
+                $daftar->pengawasan_id=$request->pengawasan_id;
+                $daftar->no_pengawasan=$request->no_pengawasan;
+                $daftar->tgl_pengawasan=$thn.'-'.$bln.'-'.$tgl;
+                $daftar->save();
 
-        if(is_null($cekdaftar))
-        {
-            $daftar=new DaftarTemuan;
-            $daftar->aparat_id=$aparat->id;
-            $daftar->dinas_id=$request->dinas_id;
-            $daftar->tahun=$request->tahun;
-            $daftar->pengawasan_id=$request->pengawasan_id;
-            $daftar->no_pengawasan=$request->no_pengawasan;
-            $daftar->tgl_pengawasan=$thn.'-'.$bln.'-'.$tgl;
-            $daftar->save();
+                $daftar_id=$daftar->id;
+            }
+            else
+            {
+                $daftar_id=$cekdaftar->id;
+            }
+            
 
-            $daftar_id=$daftar->id;
+            foreach($request->temuan as $k=>$v)
+            {
+                $detail=new DetailTemuan;
+                $detail->flag=0;
+                $detail->daftar_id=$daftar_id;
+                $detail->pengawasan_id=$request->pengawasan_id;
+                $detail->temuan_id=$v;
+                $detail->uraian_temuan=$request->uraian_temuan[$k];
+                $detail->sebab_id=isset($request->sebab[$k]) ? $request->sebab[$k] : null;
+                $detail->penyebab=isset($request->uraian_sebab[$k]) ? $request->uraian_sebab[$k] : null;
+                $detail->rekomendasi_id=$request->rekomendasi[$k];
+                $detail->uraian_rekomendasi=$request->uraian_rekomendasi[$k];
+                $detail->kerugian=str_replace(array(',','.'),'',$request->kerugian[$k]);
+                $detail->save();
+            }
+
+            DB::commit();
+            // return redirect('list-temuan')
+            return redirect('temuan/'.$daftar_id)
+                ->with('success', 'Daftar Temuan berhasil Ditambahkan')
+                ->with('dinas_id',$request->dinas_id)
+                ->with('tahun',$request->tahun)
+                ->with('pengawasan_id',$request->pengawasan_id);
         }
-        else
+        catch(Exception $ex)
         {
-            $daftar_id=$cekdaftar->id;
+            DB::rollback();
+            return redirect('temuan/'.$daftar_id)
+                ->with('error', 'Daftar Temuan Tidak berhasil Ditambahkan');
         }
         
-
-        foreach($request->temuan as $k=>$v)
-        {
-            $detail=new DetailTemuan;
-            $detail->flag=0;
-            $detail->daftar_id=$daftar_id;
-            $detail->pengawasan_id=$request->pengawasan_id;
-            $detail->temuan_id=$v;
-            $detail->uraian_temuan=$request->uraian_temuan[$k];
-            $detail->sebab_id=$request->sebab[$k];
-            $detail->penyebab=$request->uraian_sebab[$k];
-            $detail->rekomendasi_id=$request->rekomendasi[$k];
-            $detail->uraian_rekomendasi=$request->uraian_rekomendasi[$k];
-            $detail->kerugian=str_replace(array(',','.'),'',$request->kerugian[$k]);
-            $detail->save();
-        }
-
-        // return redirect('list-temuan')
-        return redirect('temuan/'.$daftar_id)
-            ->with('success', 'Daftar Temuan berhasil Ditambahkan')
-            ->with('dinas_id',$request->dinas_id)
-            ->with('tahun',$request->tahun)
-            ->with('pengawasan_id',$request->pengawasan_id);
+        
         // echo nl2br($request->uraian_rekomendasi[0]);
     }
 

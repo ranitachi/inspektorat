@@ -65,7 +65,7 @@ class TindakLanjutTemuanController extends Controller
         $temuan = DetailTemuan::with('pengawasan')->findOrFail($id);
 
         $tindaklanjut = TindakLanjutTemuan::where('detail_id', $id)->with('dokumen_tindak_lanjut')->first();
-
+        // return $tindaklanjut;
         return view('backend.pages.tanggapan.edit')
             ->with('tindaklanjut', $tindaklanjut)
             ->with('temuan', $temuan);

@@ -1,13 +1,13 @@
 @extends('backend.layouts.master')
 
 @section('title')
-    <title>Tambah Detail Temuan</title>
+    <title>Edit Detail Temuan</title>
 @endsection
 @section('content')
 	<div class="col-md-12">
 		<div class="widget">
 			<header class="widget-header">
-				<span class="widget-title">Tambah Detail Temuan</span>
+				<span class="widget-title">Edit Detail Temuan</span>
             </header>
 			<hr class="widget-separator">
 			<div class="widget-body">

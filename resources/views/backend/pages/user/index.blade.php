@@ -210,7 +210,7 @@
 									<td>{{ $us->nip }}</td>
 									<td>{{ $us->name }}</td>
 									<td>{{ $us->email }}</td>
-									<td>{{ isset($us->user->dinas_id) ? $us->user->dinas->nama_dinas : '-' }}</td>
+									<td>{{ isset($us->user->dinas->nama_dinas) ? $us->user->dinas->nama_dinas : '-' }}</td>
 									
 									@switch($us->level)
 										@case(1)

@@ -125,7 +125,8 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-10 col-sm-offset-2">
-                            <button type="submit" class="btn btn-success">Simpan</button>
+                            <a href="{{ URL::previous() }}" class="btn btn-info"><i class="fa fa-chevron-left"></i> Kembali</a>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Simpan</button>
                         </div>
                     </div>
                 </form>

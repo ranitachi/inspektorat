@@ -169,7 +169,7 @@
                                             <td>{{ $no }}</td>
                                             <td>{{ $opd->userkepala->nip }}</td>
                                             <td>{{ $opd->nama }}</td>
-                                            <td>{{ $opd->dinas->nama_dinas }}</td>
+                                            <td>{{ isset($opd->dinas->nama_dinas) ? $opd->dinas->nama_dinas : '' }}</td>
                                             <td>
                                                 Golongan : {{ $opd->userkepala->golongan }}<br>
                                                 Jabatan : {{ $opd->userkepala->jabatan }}<br>

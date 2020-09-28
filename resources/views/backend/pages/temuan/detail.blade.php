@@ -125,11 +125,12 @@
                                     @php
                                         $keydaftar=0;
                                     @endphp
-                                    @if (isset($det[$temuan->id]))
                                     
-                                        @foreach ($det[$temuan->id] as $key=>$us)
+                                    @if (isset($det[$id]))
+                                    
+                                        @foreach ($det[$id] as $key=>$us)
                                             @if (Auth::user()->level==3)
-                                                @if ($us->flag!=0)
+                                                {{-- @if ($us->flag!=0) --}}
                                                     <tr>
                                                         <td>{{ $keydaftar = $keydaftar + 1 }}</td>
                                                         <td>
@@ -138,7 +139,7 @@
                                                         <td class="text-center">{{$us->temuan->code}}</td>
                                                         <td>{!! $us->uraian_rekomendasi !!}</td>
                                                         <td class="text-center">{{$us->rekomendasi->code}}</td>
-                                                        <td class="text-left">
+                                                        <td class="text-center">
                                                                 
                                                             {{-- * Status Temuan:
                                                             * 0 : Menunggu Verifikasi
@@ -154,7 +155,7 @@
                                                                     <span>Telah Diverifikasi</span><br>
                                                                     <span class="text-danger"><i>(Belum Ditindaklanjuti)</i></span>
                                                                 @elseif ($us->flag==3)
-                                                                    <a href="{{ route('tindak-lanjut.show', $us->tindak_lanjut_temuan->id) }}" style="color:green;">Telah Ditindaklanjuti</a>
+                                                                    <a href="{{ route('tindak-lanjut.show', $us->tindak_lanjut_temuan->id) }}" class="btn btn-success btn-xs">Telah Ditindaklanjuti</a>
                                                                 @else
                                                                     <span class="text-success">Proses Selesai</span> <br>
                                                                     <a href="{{ route('tindak-lanjut.show', $us->tindak_lanjut_temuan->id) }}"><i>(Lihat Detail)</i></a>
@@ -166,7 +167,7 @@
                                                                     <span>Telah Diverifikasi</span><br>
                                                                     <span class="text-danger"><i>(Belum Ditindaklanjuti)</i></span>
                                                                 @elseif ($us->flag==3)
-                                                                    <a href="{{ route('tindak-lanjut.show', $us->tindak_lanjut_temuan->id) }}" style="color:green;">Telah Ditindaklanjuti</a>
+                                                                    <a href="{{ route('tindak-lanjut.show', $us->tindak_lanjut_temuan->id) }}" class="btn btn-success btn-xs">Telah Ditindaklanjuti</a>
                                                                 @else
                                                                     <span class="text-success">Proses Selesai</span> <br>
                                                                     <a href="{{ route('tindak-lanjut.show', $us->tindak_lanjut_temuan->id) }}"><i>(Lihat Detail)</i></a>
@@ -175,10 +176,10 @@
                                                                 @if ($us->flag==0)
                                                                     <span>Menunggu Verifikasi</span>
                                                                 @elseif ($us->flag==2)
-                                                                    <a href="{{ route('tindak-lanjut.index', $us->id) }}" style="color:red;">Belum ada tindak lanjut</a>
+                                                                    <a data-toggle="tooltip" title="Klik Untuk Memberikan Tindak Lanjut" href="{{ route('tindak-lanjut.index', $us->id) }}" class="btn btn-xs btn-danger">Belum ada tindak lanjut</a>
                                                                 @elseif ($us->flag==3)
-                                                                    <span class="text-green">Telah Ditindaklanjuti</span> <br>
-                                                                    <a href="{{ route('tindak-lanjut.edit', $us->id) }}"><i>(Ubah Data)</i></a>
+                                                                    <a class="btn btn-xs btn-success">Telah Ditindaklanjuti</a> <br>
+                                                                    <a href="{{ route('tindak-lanjut.edit', $us->id) }}"><i>(Edit)</i></a>
                                                                 @else
                                                                     <span class="text-success">Proses Selesai</span> <br>
                                                                     <a href="{{ route('tindak-lanjut.show', $us->tindak_lanjut_temuan->id) }}"><i>(Lihat Detail)</i></a>
@@ -211,7 +212,7 @@
                                                         </td>
                                                         @endif
                                                     </tr>
-                                                @endif
+                                                {{-- @endif --}}
                                             @else
                                                 <tr>
                                                     <td>{{ $keydaftar = $keydaftar + 1 }}</td>
@@ -222,7 +223,7 @@
                                                     <td class="text-center">{{$us->temuan->code}}</td>
                                                     <td>{!! $us->uraian_rekomendasi !!}</td>
                                                     <td class="text-center">{{$us->rekomendasi->code}}</td>
-                                                    <td class="text-left">
+                                                    <td class="text-center">
                                                             
                                                         {{-- * Status Temuan:
                                                         * 0 : Menunggu Verifikasi
@@ -238,7 +239,7 @@
                                                                 <span>Telah Diverifikasi</span><br>
                                                                 <span class="text-danger"><i>(Belum Ditindaklanjuti)</i></span>
                                                             @elseif ($us->flag==3)
-                                                                <a href="{{ route('tindak-lanjut.show', $us->tindak_lanjut_temuan->id) }}" style="color:green;">Telah Ditindaklanjuti</a>
+                                                                <a href="{{ route('tindak-lanjut.show', $us->tindak_lanjut_temuan->id) }}" class="btn btn-success btn-xs">Telah Ditindaklanjuti</a>
                                                             @else
                                                                 <span class="text-success">Proses Selesai</span> <br>
                                                                 <a href="{{ route('tindak-lanjut.show', $us->tindak_lanjut_temuan->id) }}"><i>(Lihat Detail)</i></a>
@@ -250,7 +251,9 @@
                                                                 <span>Telah Diverifikasi</span><br>
                                                                 <span class="text-danger"><i>(Belum Ditindaklanjuti)</i></span>
                                                             @elseif ($us->flag==3)
-                                                                <a href="{{ route('tindak-lanjut.show', $us->tindak_lanjut_temuan->id) }}" style="color:green;">Telah Ditindaklanjuti</a>
+                                                                <a href="{{ route('tindak-lanjut.show', $us->tindak_lanjut_temuan->id) }}" class="btn btn-success btn-xs">Telah Ditindaklanjuti</a>
+                                                                <br>
+                                                                <a href="{{ route('tindak-lanjut.show', $us->tindak_lanjut_temuan->id) }}" ><i>(Lihat)</i></a>
                                                             @else
                                                                 <span class="text-success">Proses Selesai</span> <br>
                                                                 <a href="{{ route('tindak-lanjut.show', $us->tindak_lanjut_temuan->id) }}"><i>(Lihat Detail)</i></a>
@@ -259,7 +262,7 @@
                                                             @if ($us->flag==0)
                                                                 <span>Menunggu Verifikasi</span>
                                                             @elseif ($us->flag==2)
-                                                                <a href="{{ route('tindak-lanjut.index', $us->id) }}" style="color:red;">Belum ada tindak lanjut</a>
+                                                                <a href="{{ route('tindak-lanjut.index', $us->id) }}" class="btn btn-xs btn-danger">Belum ada tindak lanjut</a>
                                                             @elseif ($us->flag==3)
                                                                 <span class="text-green">Telah Ditindaklanjuti</span> <br>
                                                                 <a href="{{ route('tindak-lanjut.edit', $us->id) }}"><i>(Ubah Data)</i></a>
