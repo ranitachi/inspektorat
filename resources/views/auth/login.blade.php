@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Simpel - Inspektorat Kabupaten Tangerang</title>
+	<title>PaSimpel - Inspektorat Kabupaten Tangerang</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 	<meta name="description" content="Admin, Dashboard, Bootstrap" />
@@ -21,7 +21,7 @@
 		<div class="simple-page-logo animated swing">
 			<a href="{{url('/')}}">
 				{{-- <span><i class="fa fa-gg"></i></span> --}}
-                <span>Simpel By Inspektorat</span><br>
+                <span>PaSimpel By Inspektorat</span><br>
                 <span style="font-size:15px;">Pemerintah Kabupaten Tangerang</span>
 			</a>
 		</div><!-- logo -->
